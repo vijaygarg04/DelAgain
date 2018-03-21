@@ -28,6 +28,7 @@ public class ObjectModel{
     //13.)The person who sells the product. To be set in user app.
     public String sold_by_promoter_name= "default";
 
+
     public ObjectModel(String service_tag, String msa_name, boolean msa_date_set, String msa_date, String model_number, String bundle_code) {
         this.service_tag = service_tag;
         this.msa_name = msa_name;

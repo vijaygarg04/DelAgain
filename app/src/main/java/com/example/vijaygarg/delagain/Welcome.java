@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 
 public class Welcome extends AppCompatActivity {
-Button model,dataentry;
+Button model,dataentry,generatereport;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -17,6 +17,13 @@ Button model,dataentry;
             @Override
             public void onClick(View view) {
                 startActivity(new Intent(Welcome.this,AddRemoveModel.class));
+            }
+        });
+        generatereport=findViewById(R.id.generatereport);
+        generatereport.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Welcome.this,GenerateReport.class));
             }
         });
         dataentry=findViewById(R.id.dataentry);

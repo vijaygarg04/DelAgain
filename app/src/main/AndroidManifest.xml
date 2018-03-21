@@ -19,7 +19,8 @@
         <activity android:name=".Welcome" />
         <activity android:name=".userdata.SignUpActivity" />
         <activity android:name=".AddRemoveModel" />
-        <activity android:name=".DataEntry"></activity>
+        <activity android:name=".DataEntry" />
+        <activity android:name=".GenerateReport"></activity>
     </application>
 
 </manifest>
