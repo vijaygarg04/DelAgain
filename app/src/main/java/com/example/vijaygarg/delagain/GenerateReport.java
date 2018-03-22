@@ -1,226 +1,238 @@
 package com.example.vijaygarg.delagain;
 
-import android.app.ProgressDialog;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
+import android.app.Activity;
+import android.content.Context;
 import android.os.Bundle;
+import android.os.Environment;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
+
+import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+
 
 import com.example.vijaygarg.delagain.Model.ObjectModel;
-import com.example.vijaygarg.delagain.excel.Controller;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-
-public class GenerateReport extends AppCompatActivity {
-EditText startdate,enddate;
-Button preparesheet;
-HashMap<String,ObjectModel> arr;
-DatabaseReference databaseReference;
+public class GenerateReport extends Activity implements View.OnClickListener
+{
+    EditText startdate,enddate;
+    Button writeExcelButton;
+    static String TAG = "ExelLog";
+    DatabaseReference databaseReference;
+    HashMap<String,ObjectModel> data;
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_report);
         startdate=findViewById(R.id.startdate);
         enddate=findViewById(R.id.enddate);
-        preparesheet=findViewById(R.id.btnpreparesheet);
-        arr=new HashMap<>();
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("msa");
-        preparesheet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        data=new HashMap<>();
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("msa").child("21032018");
+        writeExcelButton = (Button) findViewById(R.id.btnpreparesheet);
+        writeExcelButton.setOnClickListener(this);
 
-                ReadFirebaseData readFirebaseData=new ReadFirebaseData();
-                try{
-                readFirebaseData.execute();
-                }catch (Exception e){
-
-                }finally {
-                    Log.i("size",arr.size()+"");
-                    new InsertDataActivity().execute();
-                }
-//                DeleteDataActivity deleteDataActivity=new DeleteDataActivity();
-//                deleteDataActivity.execute();
-
-            }
-        });
 
     }
-    class DeleteDataActivity extends AsyncTask<Void, Void, Void> {
 
-        ProgressDialog dialog;
-        String result=null;
+    public void onClick(View v)
+    {
+        switch (v.getId())
+        {
+            case R.id.btnpreparesheet:
 
-
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-
-
-
-        }
-
-        @Nullable
-        @Override
-        protected Void doInBackground(Void... params) {
-            Log.i(Controller.TAG,"IDVALUE");
-            JSONObject jsonObject = Controller.deleteAllData();
-            Log.i(Controller.TAG, "Json obj "+jsonObject);
-
+            DatabaseReference mydatabase=databaseReference;
             try {
-                /**
-                 * Check Whether Its NULL???
-                 */
-                if (jsonObject != null) {
+                mydatabase.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
+                            ObjectModel objectModel = dataSnapshot1.getValue(ObjectModel.class);
+                            data.put(objectModel.getService_tag(), objectModel);
+                        }
+                        saveExcelFile(GenerateReport.this,"myExcel2.xls");
+                    }
 
-                    result=jsonObject.getString("result");
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+            }catch(Exception e ){
+
+            }finally {
 
 
-                }
-            } catch (JSONException je) {
-                Log.i(Controller.TAG, "" + je.getLocalizedMessage());
             }
-            return null;
-        }
-        @RequiresApi(api = Build.VERSION_CODES.O)
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            Toast.makeText(getApplicationContext(),result,Toast.LENGTH_LONG).show();
-            SimpleDateFormat sdf=new SimpleDateFormat("ddMMyyyy");
-            Calendar date=Calendar.getInstance();
-            String val=sdf.format(date.getTime()).toString();
-
-            Log.i("date",sdf.format(date.getTime()).toString());
-
-
-
+                break;
 
         }
     }
-    class ReadFirebaseData extends AsyncTask<Void, Void, Void> {
 
-        ProgressDialog dialog;
-        String result=null;
-        DatabaseReference mydatabaseReference;
+    private boolean saveExcelFile(Context context, String fileName) {
 
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-             dialog = new ProgressDialog(GenerateReport.this);
-            dialog.setTitle("Hey Wait Please...");
-            dialog.setMessage("Deleting... ");
-            dialog.show();
-            mydatabaseReference=databaseReference.child("21032018");
-
+        if (!isExternalStorageAvailable() || isExternalStorageReadOnly()) {
+            Log.e(TAG, "Storage not available or read only");
+            return false;
         }
 
-        @Nullable
-        @Override
-        protected Void doInBackground(Void... params) {
+        boolean success = false;
 
-            mydatabaseReference.addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(DataSnapshot dataSnapshot) {
-                    for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-                        ObjectModel objectModel=dataSnapshot1.getValue(ObjectModel.class);
-                        arr.put(objectModel.getService_tag(),objectModel);
-                    }
-                }
+        Workbook wb = new HSSFWorkbook();
 
-                @Override
-                public void onCancelled(DatabaseError databaseError) {
-
-                }
-            });
-            return null;
-        }
-        @RequiresApi(api = Build.VERSION_CODES.O)
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            dialog.dismiss();
-            Toast.makeText(getApplicationContext(),result,Toast.LENGTH_LONG).show();
-            SimpleDateFormat sdf=new SimpleDateFormat("ddMMyyyy");
-            Calendar date=Calendar.getInstance();
-            String val=sdf.format(date.getTime()).toString();
-
-            Log.i("date",sdf.format(date.getTime()).toString());
+        Cell c = null;
 
 
 
+        Sheet sheet1 = null;
+        sheet1 = wb.createSheet("Reporting");
 
-        }
+
+        // Generate column headings
+        ArrayList<String> keys=new ArrayList<>(data.keySet());
+        sheet1.setColumnWidth(0, (15 * 500));
+        sheet1.setColumnWidth(1, (15 * 500));
+        sheet1.setColumnWidth(2, (15 * 500));
+        sheet1.setColumnWidth(3, (15 * 500));
+        sheet1.setColumnWidth(4, (15 * 500));
+        sheet1.setColumnWidth(5, (15 * 500));
+        sheet1.setColumnWidth(6, (15 * 500));
+        sheet1.setColumnWidth(7, (15 * 500));
+        sheet1.setColumnWidth(8, (15 * 500));
+
+        Row row1 = sheet1.createRow(0);
+        c = row1.createCell(0);
+        c.setCellValue("S.No");
+        c = row1.createCell(1);
+        c.setCellValue("Store Name");
+        c = row1.createCell(2);
+        c.setCellValue("Promoter Name");
+        c = row1.createCell(3);
+        c.setCellValue("Model Number");
+        c = row1.createCell(4);
+        c.setCellValue("Service Tag");
+        c = row1.createCell(5);
+        c.setCellValue("Bundle Code");
+        c = row1.createCell(6);
+        c.setCellValue("MSA Name");
+        c = row1.createCell(7);
+        c.setCellValue("MSA DATE");
+        c = row1.createCell(8);
+        c.setCellValue("Sell In DATE");
+        c = row1.createCell(9);
+        c.setCellValue("Sell Out DATE");
+
+        for(int i=1;i<=keys.size();i++) {
+
+            Row row = sheet1.createRow(i);
+            for(int j=0;j<9;j++) {
+             c = row.createCell(j);
+             switch (j){
+                 case 0:
+                     c.setCellValue(i+"");
+                     break;
+                 case 1:
+                     c.setCellValue(data.get(keys.get(i-1)).getStore_name());
+                     break;
+                 case 2:
+
+                     c.setCellValue(data.get(keys.get(i-1)).getSold_by_promoter_name());
+                     break;
+                 case 3:
+
+                     c.setCellValue(data.get(keys.get(i-1)).getModel_number());
+                     break;
+                 case 4:
+
+                     c.setCellValue(data.get(keys.get(i-1)).getService_tag());
+                     break;
+                 case 5:
+
+                     c.setCellValue(data.get(keys.get(i-1)).getBundle_code());
+                     break;
+                 case 6:
+
+                     c.setCellValue(data.get(keys.get(i-1)).getMsa_name());
+                     break;
+                 case 7:
+
+                     c.setCellValue(data.get(keys.get(i-1)).getMsa_date());
+                     break;
+                 case 8:
+
+                     c.setCellValue(data.get(keys.get(i-1)).getStore_sell_in_date());
+                     break;
+                 case 9:
+
+                     c.setCellValue(data.get(keys.get(i-1)).getStore_sell_out_date());
+                     break;
+                     default:
+
+                         break;
+
+             }
+            c.setCellValue(data.get(keys.get(i-1)).getStore_sell_in_date());
+
+
     }
-    class InsertDataActivity extends AsyncTask < Void, Void, Void > {
-
-        ProgressDialog dialog;
-        int jIndex;
-        int x;
-
-        String result = null;
-
-
-        @Override
-        protected void onPreExecute() {
-
-            super.onPreExecute();
-
-            dialog = new ProgressDialog(GenerateReport.this);
-            dialog.setTitle("Hey Wait Please...");
-            dialog.setMessage("Inserting your values..");
-            dialog.show();
-
         }
+        // Create a path where we will place our List of objects on external storage
+        File file = new File(context.getExternalFilesDir(null), fileName);
+        FileOutputStream os = null;
 
-        @Nullable
-        @Override
-        protected Void doInBackground(Void...params) {
-            ArrayList<String> mylist= new ArrayList<>(arr.keySet());
-
-            for(int i=0;i<mylist.size();i++) {
-                String sno = i + 1 + "";
-                JSONObject jsonObject = Controller.insertData(sno, arr.get(mylist.get(i)));
-
-
-                try {
-
-                    if (jsonObject != null) {
-
-                        result = jsonObject.getString("result");
-
-                    }
-                } catch (JSONException je) {
-                    Log.i(Controller.TAG, "" + je.getLocalizedMessage());
-                }
+        try {
+            os = new FileOutputStream(file);
+            wb.write(os);
+            Log.w("FileUtils", "Writing file" + file);
+            success = true;
+        } catch (IOException e) {
+            Log.w("FileUtils", "Error writing " + file, e);
+        } catch (Exception e) {
+            Log.w("FileUtils", "Failed to save file", e);
+        } finally {
+            try {
+                if (null != os)
+                    os.close();
+            } catch (Exception ex) {
             }
-            return null;
         }
-        @Override
-        protected void onPostExecute(Void aVoid) {
-            super.onPostExecute(aVoid);
-            dialog.dismiss();
-            Toast.makeText(getApplicationContext(), result, Toast.LENGTH_LONG).show();
+        return success;
+    }
 
+
+
+    public static boolean isExternalStorageReadOnly() {
+        String extStorageState = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
+            return true;
         }
+        return false;
+    }
+
+    public static boolean isExternalStorageAvailable() {
+        String extStorageState = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
+            return true;
+        }
+        return false;
     }
 }
+
+

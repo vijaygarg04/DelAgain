@@ -49,13 +49,7 @@ StoreAdapter sa;
                 final String sstore=store.getText().toString();
 
                 DatabaseReference mydatabase=databaseReference.child("storenames").child(sstore);
-                mydatabase.setValue("true").addOnCompleteListener(new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        arrayList.add(sstore);
-                        sa.notifyDataSetChanged();
-                    }
-                });
+                mydatabase.setValue("true");
             }
         });
 
