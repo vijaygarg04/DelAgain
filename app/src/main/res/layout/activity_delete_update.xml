@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.example.vijaygarg.delagain.DeleteUpdate">
+<android.support.v7.widget.RecyclerView
+    android:layout_width="match_parent"
+    android:id="@+id/rvpromoter"
+    android:layout_height="wrap_content">
+
+</android.support.v7.widget.RecyclerView>
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter id to be updated"
+        android:id="@+id/updateid"/>
+    <EditText
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Promoter name"
+        android:id="@+id/promotername"/>
+    <EditText
+
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="useridassigned"
+        android:id="@+id/userid"/>
+
+    <EditText
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Store Assigned"
+        android:id="@+id/storeassigned"/>
+
+    <EditText
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/contactnumber"
+        android:hint="Contact Number"/>
+    <EditText
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/dateofjoin"
+        android:hint="dateofjoining"/>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/updatedata"
+        android:text="UpdateData"
+        android:visibility="gone"/>
+    <LinearLayout
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:text="remove"
+            android:layout_height="wrap_content"
+            android:id="@+id/remove"
+            android:layout_marginRight="20dp"/>
+        <Button
+            android:text="update"
+            android:layout_width="0dp"
+            android:layout_marginLeft="20dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:id="@+id/update"/>
+    </LinearLayout>
+</LinearLayout>

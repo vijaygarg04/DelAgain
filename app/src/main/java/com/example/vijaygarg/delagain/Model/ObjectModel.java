@@ -24,11 +24,29 @@ public class ObjectModel{
     //11.)This is the model number of the product, would be set by the admin while entering the product into database.
     public String model_number= "default";
     //12.)Bundle Code
+
+    public String getDisplay_request_result() {
+        return display_request_result;
+    }
+
+    public void setDisplay_request_result(String display_request_result) {
+        this.display_request_result = display_request_result;
+    }
+
+    public boolean isDisplay_request() {
+        return display_request;
+    }
+
+    public void setDisplay_request(boolean display_request) {
+        this.display_request = display_request;
+    }
+
     public String bundle_code= "default";
     //13.)The person who sells the product. To be set in user app.
     public String sold_by_promoter_name= "default";
 
-
+    public String display_request_result="default";
+    public boolean display_request=false;
     public ObjectModel(String service_tag, String msa_name, boolean msa_date_set, String msa_date, String model_number, String bundle_code) {
         this.service_tag = service_tag;
         this.msa_name = msa_name;
@@ -36,6 +54,24 @@ public class ObjectModel{
         this.msa_date = msa_date;
         this.model_number = model_number;
         this.bundle_code = bundle_code;
+    }
+
+    public ObjectModel(String service_tag, String msa_name, boolean store_name_set, String store_name, boolean msa_date_set, String msa_date, String store_sell_in_date, boolean store_sell_in_date_set, String store_sell_out_date, boolean store_sell_out_date_set, String model_number, String bundle_code, String sold_by_promoter_name, String display_request_result, boolean display_request) {
+        this.service_tag = service_tag;
+        this.msa_name = msa_name;
+        this.store_name_set = store_name_set;
+        this.store_name = store_name;
+        this.msa_date_set = msa_date_set;
+        this.msa_date = msa_date;
+        this.store_sell_in_date = store_sell_in_date;
+        this.store_sell_in_date_set = store_sell_in_date_set;
+        this.store_sell_out_date = store_sell_out_date;
+        this.store_sell_out_date_set = store_sell_out_date_set;
+        this.model_number = model_number;
+        this.bundle_code = bundle_code;
+        this.sold_by_promoter_name = sold_by_promoter_name;
+        this.display_request_result = display_request_result;
+        this.display_request = display_request;
     }
 
     public ObjectModel(String service_tag, String msa_name, boolean store_name_set, String store_name, boolean msa_date_set, String msa_date, String store_sell_in_date, boolean store_sell_in_date_set, String store_sell_out_date, boolean store_sell_out_date_set, String model_number, String bundle_code, String sold_by_promoter_name) {

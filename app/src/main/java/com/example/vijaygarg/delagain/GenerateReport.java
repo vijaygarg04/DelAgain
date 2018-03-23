@@ -45,9 +45,10 @@ public class GenerateReport extends Activity implements View.OnClickListener
         startdate=findViewById(R.id.startdate);
         enddate=findViewById(R.id.enddate);
         data=new HashMap<>();
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("msa").child("21032018");
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("msa");
         writeExcelButton = (Button) findViewById(R.id.btnpreparesheet);
         writeExcelButton.setOnClickListener(this);
+
 
 
     }
@@ -64,8 +65,10 @@ public class GenerateReport extends Activity implements View.OnClickListener
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
-                            ObjectModel objectModel = dataSnapshot1.getValue(ObjectModel.class);
-                            data.put(objectModel.getService_tag(), objectModel);
+                            for (DataSnapshot dataSnapshot2 : dataSnapshot1.getChildren()) {
+                                ObjectModel objectModel = dataSnapshot2.getValue(ObjectModel.class);
+                                data.put(objectModel.getService_tag(), objectModel);
+                            }
                         }
                         saveExcelFile(GenerateReport.this,"myExcel2.xls");
                     }
@@ -116,6 +119,7 @@ public class GenerateReport extends Activity implements View.OnClickListener
         sheet1.setColumnWidth(6, (15 * 500));
         sheet1.setColumnWidth(7, (15 * 500));
         sheet1.setColumnWidth(8, (15 * 500));
+        sheet1.setColumnWidth(9, (15 * 500));
 
         Row row1 = sheet1.createRow(0);
         c = row1.createCell(0);
@@ -142,53 +146,49 @@ public class GenerateReport extends Activity implements View.OnClickListener
         for(int i=1;i<=keys.size();i++) {
 
             Row row = sheet1.createRow(i);
-            for(int j=0;j<9;j++) {
+            for(int j=0;j<10;j++) {
              c = row.createCell(j);
-             switch (j){
+             switch (j) {
                  case 0:
-                     c.setCellValue(i+"");
+                     c.setCellValue(i + "");
                      break;
                  case 1:
-                     c.setCellValue(data.get(keys.get(i-1)).getStore_name());
+                     c.setCellValue(data.get(keys.get(i - 1)).getStore_name());
                      break;
                  case 2:
 
-                     c.setCellValue(data.get(keys.get(i-1)).getSold_by_promoter_name());
+                     c.setCellValue(data.get(keys.get(i - 1)).getSold_by_promoter_name());
                      break;
                  case 3:
 
-                     c.setCellValue(data.get(keys.get(i-1)).getModel_number());
+                     c.setCellValue(data.get(keys.get(i - 1)).getModel_number());
                      break;
                  case 4:
 
-                     c.setCellValue(data.get(keys.get(i-1)).getService_tag());
+                     c.setCellValue(data.get(keys.get(i - 1)).getService_tag());
                      break;
                  case 5:
 
-                     c.setCellValue(data.get(keys.get(i-1)).getBundle_code());
+                     c.setCellValue(data.get(keys.get(i - 1)).getBundle_code());
                      break;
                  case 6:
 
-                     c.setCellValue(data.get(keys.get(i-1)).getMsa_name());
+                     c.setCellValue(data.get(keys.get(i - 1)).getMsa_name());
                      break;
                  case 7:
 
-                     c.setCellValue(data.get(keys.get(i-1)).getMsa_date());
+                     c.setCellValue(data.get(keys.get(i - 1)).getMsa_date());
                      break;
                  case 8:
 
-                     c.setCellValue(data.get(keys.get(i-1)).getStore_sell_in_date());
+                     c.setCellValue(data.get(keys.get(i - 1)).getStore_sell_in_date());
                      break;
                  case 9:
 
-                     c.setCellValue(data.get(keys.get(i-1)).getStore_sell_out_date());
+                     c.setCellValue(data.get(keys.get(i - 1)).getStore_sell_out_date());
                      break;
-                     default:
-
-                         break;
 
              }
-            c.setCellValue(data.get(keys.get(i-1)).getStore_sell_in_date());
 
 
     }

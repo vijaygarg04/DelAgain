@@ -20,7 +20,9 @@
         <activity android:name=".userdata.SignUpActivity" />
         <activity android:name=".AddRemoveModel" />
         <activity android:name=".DataEntry" />
-        <activity android:name=".GenerateReport"></activity>
+        <activity android:name=".GenerateReport" />
+        <activity android:name=".UserManagement" />
+        <activity android:name=".DeleteUpdate"></activity>
     </application>
 
 </manifest>

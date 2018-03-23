@@ -8,40 +8,58 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.vijaygarg.delagain.Adapters.DataEntryAdapter;
 import com.example.vijaygarg.delagain.Model.ObjectModel;
+import com.google.firebase.database.ChildEventListener;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 
 public class DataEntry extends AppCompatActivity {
 EditText serialtag,msaname,modelnumber,bundlecode;
 Button addtolist,submitlist;
-    DatabaseReference databaseReference;
-
+DatabaseReference databaseReference;
+HashMap<String,Boolean>alreadyavailable;
 RecyclerView rv;
 ArrayList<ObjectModel>arr;
+
+
     DataEntryAdapter dataEntryAdapter;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_data_entry);
+
         serialtag=findViewById(R.id.serialtag);
         msaname=findViewById(R.id.msaname);
         modelnumber=findViewById(R.id.modelnumber);
         bundlecode=findViewById(R.id.bundlecode);
+
         addtolist=findViewById(R.id.addtolist);
         submitlist=findViewById(R.id.submitlist);
+
         arr=new ArrayList<>();
+        alreadyavailable=new HashMap<>();
         rv=findViewById(R.id.rv);
         rv.setLayoutManager(new LinearLayoutManager(this));
-
         dataEntryAdapter=new DataEntryAdapter(this,arr);
         rv.setAdapter(dataEntryAdapter);
+
+        databaseReference=FirebaseDatabase.getInstance().getReference().child("msa");
+
+
+
 
         addtolist.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -80,7 +98,7 @@ ArrayList<ObjectModel>arr;
             Date date=new Date();
             SimpleDateFormat simpleDateFormat=new SimpleDateFormat("ddMMyyyy");
             String sdate=simpleDateFormat.format(date).toString().trim();
-            databaseReference= FirebaseDatabase.getInstance().getReference().child("msa").child(sdate);
+            databaseReference= FirebaseDatabase.getInstance().getReference().child("msa");
 
         }
 
@@ -97,8 +115,11 @@ ArrayList<ObjectModel>arr;
 
         @Override
         protected Void doInBackground(Void... voids) {
-            for(int i=0;i<arr.size();i++){
-                databaseReference.child(arr.get(i).getService_tag()).setValue(arr.get(i));
+            for( int i=0;i<arr.size();i++){
+
+                    databaseReference.child(arr.get(i).getService_tag()).setValue(arr.get(i));
+              
+
             }
             return null;
 

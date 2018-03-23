@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#007FD0">
+
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -6,48 +15,161 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
+    android:padding="10dp"
     tools:context="com.example.vijaygarg.delagain.Welcome">
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardElevation="15dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#FFF0FF">
 <Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+    android:textSize="40sp"
+    android:fontFamily="@string/bottom_sheet_behavior"
+    android:textColor="#ffffff"
+    android:layout_margin="2dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:text="Generate Report"
+    android:background="@drawable/generatereportbuttondesign"
     android:id="@+id/generatereport"/>
-
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#FFF0FF">
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="User Management"/>
+        android:textSize="40sp"
+        android:fontFamily="@string/bottom_sheet_behavior"
+        android:textColor="#ffffff"
+        android:background="@drawable/generatereportbuttondesign"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="User Management"
+        android:id="@+id/usermanagement"/>
+    </android.support.v7.widget.CardView>
 
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#FFF0FF">
     <Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:fontFamily="@string/bottom_sheet_behavior"
+        android:textColor="#ffffff"
+        android:background="@drawable/generatereportbuttondesign"
+        android:layout_margin="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:text="Data Entry"
         android:id="@+id/dataentry"/>
+    </android.support.v7.widget.CardView>
 
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#FFF0FF">
     <Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:fontFamily="@string/bottom_sheet_behavior"
+        android:textColor="#ffffff"
+        android:background="@drawable/generatereportbuttondesign"
+        android:layout_margin="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:text="Competition Report"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#FFF0FF">
 
     <Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:fontFamily="@string/bottom_sheet_behavior"
+        android:textColor="#ffffff"
+        android:background="@drawable/generatereportbuttondesign"
+        android:layout_margin="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:text="Display"/>
+    </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#FFF0FF">
+
 
     <Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:fontFamily="@string/bottom_sheet_behavior"
+        android:textColor="#ffffff"
+        android:background="@drawable/generatereportbuttondesign"
+        android:layout_margin="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:text="Chat"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#FFF0FF">
+
 
     <Button
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:fontFamily="@string/bottom_sheet_behavior"
+        android:textColor="#ffffff"
+        android:background="@drawable/generatereportbuttondesign"
+        android:layout_margin="5dp"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:text="Scheme"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#FFF0FF">
+
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:textSize="40sp"
+        android:fontFamily="@string/bottom_sheet_behavior"
+        android:textColor="#ffffff"
+        android:background="@drawable/generatereportbuttondesign"
+        android:layout_margin="5dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:text="Model"
         android:id="@+id/welcomebtnmodel"/>
+</android.support.v7.widget.CardView>
+
 
 
 </LinearLayout>
+</ScrollView>

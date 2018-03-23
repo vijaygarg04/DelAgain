@@ -7,12 +7,19 @@ import android.view.View;
 import android.widget.Button;
 
 public class Welcome extends AppCompatActivity {
-Button model,dataentry,generatereport;
+Button model,dataentry,generatereport,usermanagement;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome);
         model=findViewById(R.id.welcomebtnmodel);
+        usermanagement=findViewById(R.id.usermanagement);
+        usermanagement.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Welcome.this,UserManagement.class));
+            }
+        });
         model.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
