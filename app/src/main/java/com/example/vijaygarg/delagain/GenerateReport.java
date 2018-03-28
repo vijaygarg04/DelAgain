@@ -2,8 +2,10 @@ package com.example.vijaygarg.delagain;
 
 import android.app.Activity;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +20,9 @@ import org.apache.poi.ss.usermodel.Workbook;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -37,6 +42,8 @@ public class GenerateReport extends Activity implements View.OnClickListener
     static String TAG = "ExelLog";
     DatabaseReference databaseReference;
     HashMap<String,ObjectModel> data;
+    HashMap<String,Boolean>arr;
+    HashMap<String ,Boolean>servicetag;
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -45,32 +52,49 @@ public class GenerateReport extends Activity implements View.OnClickListener
         startdate=findViewById(R.id.startdate);
         enddate=findViewById(R.id.enddate);
         data=new HashMap<>();
-        databaseReference= FirebaseDatabase.getInstance().getReference().child("msa");
+        arr=new HashMap<>();
+        servicetag=new HashMap<>();
+        databaseReference= FirebaseDatabase.getInstance().getReference().child("sell_out");
         writeExcelButton = (Button) findViewById(R.id.btnpreparesheet);
         writeExcelButton.setOnClickListener(this);
 
 
 
     }
-
+    @RequiresApi(api = Build.VERSION_CODES.O)
     public void onClick(View v)
     {
+
+
         switch (v.getId())
         {
             case R.id.btnpreparesheet:
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("ddMMyyyy");
 
-            DatabaseReference mydatabase=databaseReference;
-            try {
+                String sstartdate=startdate.getText().toString();
+                String senddate=enddate.getText().toString();
+
+                LocalDate start= LocalDate.of(Integer.parseInt(sstartdate.substring(4,8)), Integer.parseInt(sstartdate.substring(2,4)), Integer.parseInt(sstartdate.substring(0,2)));
+                LocalDate end= LocalDate.of(Integer.parseInt(senddate.substring(4,8)), Integer.parseInt(senddate.substring(2,4)), Integer.parseInt(senddate.substring(0,2)));
+
+                datesBetween(start,end);
+                DatabaseReference mydatabase=databaseReference;
+
                 mydatabase.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for (DataSnapshot dataSnapshot1 : dataSnapshot.getChildren()) {
                             for (DataSnapshot dataSnapshot2 : dataSnapshot1.getChildren()) {
-                                ObjectModel objectModel = dataSnapshot2.getValue(ObjectModel.class);
-                                data.put(objectModel.getService_tag(), objectModel);
+                                if(arr.containsKey(dataSnapshot2.getKey())){
+                                    for(DataSnapshot dataSnapshot3:dataSnapshot2.getChildren()){
+                                        servicetag.put(dataSnapshot3.getKey(),true);
+                                    }
+
+                                }
                             }
                         }
-                        saveExcelFile(GenerateReport.this,"myExcel2.xls");
+                        retrivedatanow();
+
                     }
 
                     @Override
@@ -78,16 +102,47 @@ public class GenerateReport extends Activity implements View.OnClickListener
 
                     }
                 });
-            }catch(Exception e ){
 
-            }finally {
-
-
-            }
                 break;
 
         }
     }
+
+    private void retrivedatanow() {
+
+        DatabaseReference mydb=FirebaseDatabase.getInstance().getReference().child("msa");
+        mydb.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                    if(servicetag.containsKey(dataSnapshot1.getKey())){
+                        data.put(dataSnapshot1.getKey(),dataSnapshot1.getValue(ObjectModel.class));
+                    }
+                }
+                saveExcelFile(GenerateReport.this,"myExcel2.xls");
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.O)
+    private  void datesBetween(LocalDate start, LocalDate end) {
+        for (LocalDate date = start; date.isBefore(end); date = date.plusDays(1)) {
+            String sdate=date.toString();
+            String year=sdate.substring(0,4);
+            String month=sdate.substring(5,7);
+            String day=sdate.substring(8,10);
+            arr.put(day+month+year,true);
+            System.out.println(date.toString());
+        }
+
+    }
+
 
     private boolean saveExcelFile(Context context, String fileName) {
 

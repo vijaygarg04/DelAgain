@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="5dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="#EBDBB5"
+    android:background="#EBDBB5">
+    <LinearLayout
+        android:layout_margin="5dp"
+        android:padding="5dp"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+
+                android:textColor="#714AFF"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:text="Employee Name"
+                android:textSize="16sp"
+                />
+            <TextView
+            android:layout_width="0dp"
+            android:gravity="right"
+            android:textColor="#5800F7"
+            android:textSize="16sp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Name"
+            android:id="@+id/name"/>
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="#714AFF"
+
+                android:textSize="16sp"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:text="Employee ID"
+                />
+        <TextView
+            android:textSize="16sp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="right"
+
+            android:textColor="#5800F7"
+            android:layout_height="wrap_content"
+            android:text="EMPLOYEE ID"
+            android:id="@+id/id"/>
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="#714AFF"
+
+                android:textSize="16sp"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:text="Store"/>
+
+            <TextView
+                android:textColor="#5800F7"
+                android:textSize="16sp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:gravity="right"
+            android:text="Store"
+            android:id="@+id/store"/>
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="#714AFF"
+
+                android:textSize="16sp"
+                android:layout_width="0dp"
+                android:layout_weight="0.5"
+                android:layout_height="wrap_content"
+                android:text="Contact"
+                />
+        <TextView
+            android:textColor="#5800F7"
+            android:textSize="16sp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="Contact"
+            android:gravity="right"
+            android:id="@+id/contact"/>
+        </LinearLayout>
+        <LinearLayout
+
+            android:layout_marginTop="3dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:textColor="#714AFF"
+
+                android:textSize="16sp"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Date Of Joining"/>
+            <TextView
+                android:textColor="#5800F7"
+                android:textSize="16sp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+                android:gravity="right"
+            android:layout_height="wrap_content"
+            android:text="Date"
+            android:id="@+id/date"/>
+        </LinearLayout>
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

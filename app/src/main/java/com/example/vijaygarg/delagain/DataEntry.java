@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -18,6 +19,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.apache.poi.ss.formula.functions.LogicalFunction;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -116,12 +119,31 @@ ArrayList<ObjectModel>arr;
         @Override
         protected Void doInBackground(Void... voids) {
             for( int i=0;i<arr.size();i++){
-
-                    databaseReference.child(arr.get(i).getService_tag()).setValue(arr.get(i));
-              
+                inputdata(arr.get(i));
 
             }
+
             return null;
+
+
+        }
+        private void inputdata(final ObjectModel objectModel){
+
+            final ValueEventListener valueEventListener=new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot dataSnapshot) {
+                    if(dataSnapshot.hasChild(objectModel.getService_tag())){
+
+                    }else{
+                        databaseReference.child(objectModel.getService_tag()).setValue(objectModel);
+                    }
+                }
+                @Override
+                public void onCancelled(DatabaseError databaseError) {
+
+                }
+            };
+            databaseReference.addValueEventListener(valueEventListener);
 
 
         }

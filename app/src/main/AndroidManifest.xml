@@ -22,7 +22,9 @@
         <activity android:name=".DataEntry" />
         <activity android:name=".GenerateReport" />
         <activity android:name=".UserManagement" />
-        <activity android:name=".DeleteUpdate"></activity>
+        <activity android:name=".DeleteUpdate" />
+        <activity android:name=".Display" />
+        <activity android:name=".DisplayDevices"></activity>
     </application>
 
 </manifest>

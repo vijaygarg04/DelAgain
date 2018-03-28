@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.vijaygarg.delagain.Adapters.PromoterAdapter;
 import com.example.vijaygarg.delagain.Model.PromoterModel;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -16,25 +17,33 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 public class DeleteUpdate extends AppCompatActivity {
 
     RecyclerView recyclerView;
-    EditText idold,name,idnew,store,contact,date;
+
+    EditText idold,name,store,contact,date;
     Button remove,update,updatenow;
     DatabaseReference databaseReference;
-
+    HashMap<String,PromoterModel> data;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_delete_update);
 
+        data=new HashMap<>();
+        final PromoterAdapter promoterAdapter=new PromoterAdapter(this,data);
+
         recyclerView=findViewById(R.id.rvpromoter);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        recyclerView.setAdapter(promoterAdapter);
+
         databaseReference= FirebaseDatabase.getInstance().getReference().child("promoterinfo");
 
         idold=findViewById(R.id.updateid);
         name=findViewById(R.id.promotername);
-        idnew=findViewById(R.id.userid);
         store=findViewById(R.id.storeassigned);
         contact=findViewById(R.id.contactnumber);
         date=findViewById(R.id.dateofjoin);
@@ -46,7 +55,6 @@ public class DeleteUpdate extends AppCompatActivity {
         update.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                idnew.setVisibility(View.VISIBLE);
                 name.setVisibility(View.VISIBLE);
                 store.setVisibility(View.VISIBLE);
                 contact.setVisibility(View.VISIBLE);
@@ -69,22 +77,43 @@ public class DeleteUpdate extends AppCompatActivity {
         updatenow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final String[] sname,sid,sstore,sdate,scontact;
+                final String[] sname,sstore,sdate,scontact;
                 sname=new String[1];
-                sid=new String[1];
                 sstore=new String[1];
                 sdate=new String[1];
                 scontact=new String[1];
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        if(dataSnapshot.getKey().equals(idold.getText().toString())){
-                            PromoterModel promoterModel=dataSnapshot.getValue(PromoterModel.class);
-                            sname[0]=promoterModel.getName();
-                            sid[0]=promoterModel.getId();
-                            sstore[0]=promoterModel.getStore();
-                            sdate[0]=promoterModel.getDate();
-                           scontact[0]=promoterModel.getContact();
+                        for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()) {
+                            String iod = idold.getText().toString();
+                            if (dataSnapshot1.getKey().equals(iod)) {
+                                PromoterModel promoterModel = dataSnapshot1.getValue(PromoterModel.class);
+                                sname[0] = promoterModel.getName();
+                                sstore[0] = promoterModel.getStore();
+                                sdate[0] = promoterModel.getDate();
+                                scontact[0] = promoterModel.getContact();
+                                databaseReference.child(idold.getText().toString()).setValue(null);
+
+                                if (name.getText().toString().length() > 0) {
+                                    sname[0] = name.getText().toString();
+                                }
+
+                                if (store.getText().toString().length() > 0) {
+                                    sstore[0] = store.getText().toString();
+
+                                }
+                                if (date.getText().toString().length() > 0) {
+                                    sdate[0] = date.getText().toString();
+
+                                }
+                                if (contact.getText().toString().length() > 0) {
+                                    scontact[0] = contact.getText().toString();
+
+                                }
+                                PromoterModel newdetail = new PromoterModel(sname[0], iod, scontact[0], sdate[0], sstore[0]);
+                                databaseReference.child(iod).setValue(newdetail);
+                            }
                         }
                     }
 
@@ -93,29 +122,21 @@ public class DeleteUpdate extends AppCompatActivity {
 
                     }
                 });
-                databaseReference.child(idold.getText().toString()).setValue(null);
 
-                if(name.getText().toString().length()>0){
-                    sname[0]=name.getText().toString();
-                }
-                if(idnew.getText().toString().length()>0){
-                    sid[0]=idnew.getText().toString();
 
+            }
+        });
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                    data.put(dataSnapshot1.getValue(PromoterModel.class).getId(),dataSnapshot1.getValue(PromoterModel.class));
                 }
-                if(store.getText().toString().length()>0){
-                    sstore[0]=store.getText().toString();
+                promoterAdapter.notifyDataSetChanged();
+            }
 
-                }
-                if(date.getText().toString().length()>0){
-                    sdate[0]=date.getText().toString();
-
-                }
-                if(contact.getText().toString().length()>0){
-                    scontact[0]=contact.getText().toString();
-
-                }
-                PromoterModel newdetail=new PromoterModel(sname[0],sid[0],scontact[0],sdate[0],sstore[0]);
-                databaseReference.setValue(newdetail);
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
