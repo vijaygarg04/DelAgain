@@ -3,31 +3,37 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@drawable/generatereportbuttondesign">
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/generatereportbuttondesign"
     android:orientation="vertical"
-    tools:context="com.example.vijaygarg.delagain.DeleteUpdate">
+    tools:context="com.example.vijaygarg.delagain.DeleteUpdate"
+    android:padding="10dp">
 <android.support.v7.widget.RecyclerView
     android:layout_width="match_parent"
     android:id="@+id/rvpromoter"
-    android:layout_height="400dp"
+    android:layout_height="wrap_content"
     android:minHeight="300dp"
     >
 
 </android.support.v7.widget.RecyclerView>
 
     <EditText
-        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:textSize="16sp"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter id to be updated"
         android:id="@+id/updateid"/>
     <EditText
+        android:layout_marginTop="10dp"
         android:visibility="gone"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -37,6 +43,8 @@
 
 
     <EditText
+
+        android:layout_marginTop="10dp"
         android:visibility="gone"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -45,6 +53,8 @@
         android:id="@+id/storeassigned"/>
 
     <EditText
+
+        android:layout_marginTop="10dp"
         android:visibility="gone"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -52,6 +62,8 @@
         android:id="@+id/contactnumber"
         android:hint="Contact Number"/>
     <EditText
+
+        android:layout_marginTop="10dp"
         android:visibility="gone"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -59,29 +71,38 @@
         android:id="@+id/dateofjoin"
         android:hint="dateofjoining"/>
     <Button
+
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/updatedata"
         android:text="UpdateData"
         android:visibility="gone"/>
     <LinearLayout
+
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
     <LinearLayout
+
+        android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <Button
+
             android:layout_width="0dp"
             android:layout_weight="1"
             android:text="remove"
+            android:background="#FF0508"
             android:layout_height="wrap_content"
             android:id="@+id/remove"
             android:layout_marginRight="20dp"/>
         <Button
+            android:background="#89F389"
             android:text="update"
             android:layout_width="0dp"
             android:layout_marginLeft="20dp"

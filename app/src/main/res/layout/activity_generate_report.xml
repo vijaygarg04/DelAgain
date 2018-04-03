@@ -5,14 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:gravity="center"
-    android:background=""
+    android:background="#FFFFFF"
     android:orientation="vertical"
     tools:context="com.example.vijaygarg.delagain.GenerateReport">
     <LinearLayout
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
-        android:background=""
+        android:layout_height="400dp"
         android:orientation="vertical"
         >
         <android.support.v7.widget.CardView
@@ -22,8 +21,6 @@
             android:padding="5dp"
             app:cardElevation="3dp"
 
-            app:cardBackgroundColor=""
-            android:background=""
             android:layout_height="match_parent">
             <LinearLayout
                 android:padding="5dp"
@@ -31,24 +28,21 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical"
                 >
+                <LinearLayout
+                    android:id="@+id/calendar1"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                </LinearLayout>
+                <Button
 
-<EditText
-    android:layout_marginTop="5dp"
-    android:textSize="16sp"
-    android:gravity="center"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="startdate"
-    android:id="@+id/startdate"/>
-    <EditText
+                    android:layout_marginTop="15dp"
+                    android:text="FROM"
+                    android:background="#B2F3FF"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btncustom"/>
 
-        android:layout_marginTop="5dp"
-        android:textSize="16sp"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="enddate"
-        android:gravity="center"
-        android:id="@+id/enddate"/>
     <Button
 
         android:layout_marginTop="15dp"

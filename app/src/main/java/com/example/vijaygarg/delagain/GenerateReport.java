@@ -1,17 +1,18 @@
 package com.example.vijaygarg.delagain;
 
-import android.app.Activity;
 import android.content.Context;
-import android.os.Build;
+
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
-import android.support.annotation.RequiresApi;
+
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
+
 
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
+
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -21,12 +22,26 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
+
+
+import android.widget.Toast;
+
+import com.roomorama.caldroid.CaldroidFragment;
+import com.roomorama.caldroid.CaldroidListener;
+
+
+import java.util.Calendar;
+import java.util.Date;
 
 import com.example.vijaygarg.delagain.Model.ObjectModel;
 import com.google.firebase.database.DataSnapshot;
@@ -35,33 +50,124 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-public class GenerateReport extends Activity implements View.OnClickListener
+public class GenerateReport extends AppCompatActivity implements View.OnClickListener
 {
-    EditText startdate,enddate;
     Button writeExcelButton;
     static String TAG = "ExelLog";
     DatabaseReference databaseReference;
     HashMap<String,ObjectModel> data;
     HashMap<String,Boolean>arr;
     HashMap<String ,Boolean>servicetag;
+    HashMap<Date, Drawable>datesbetween;
+    ArrayList<String> disabledates;
+    private boolean undo = false;
+    private CaldroidFragment caldroidFragment;
+    Date startDate,endDate;
+    boolean startdateset=false;
+    boolean enddateset=false;
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
+        final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        caldroidFragment = new CaldroidFragment();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_report);
-        startdate=findViewById(R.id.startdate);
-        enddate=findViewById(R.id.enddate);
         data=new HashMap<>();
         arr=new HashMap<>();
         servicetag=new HashMap<>();
+        disabledates=new ArrayList<>();
         databaseReference= FirebaseDatabase.getInstance().getReference().child("sell_out");
-        writeExcelButton = (Button) findViewById(R.id.btnpreparesheet);
+        writeExcelButton =  findViewById(R.id.btnpreparesheet);
         writeExcelButton.setOnClickListener(this);
 
 
 
+
+
+        final Button customizeButton =  findViewById(R.id.btncustom);
+        FragmentTransaction t = getSupportFragmentManager().beginTransaction();
+        t.replace(R.id.calendar1, caldroidFragment);
+        t.commit();
+
+        // Setup listener
+        final CaldroidListener listener = new CaldroidListener() {
+
+            @Override
+            public void onSelectDate(Date date, View view) {
+                Toast.makeText(getApplicationContext(), formatter.format(date),
+                        Toast.LENGTH_SHORT).show();
+                ColorDrawable green = new ColorDrawable(Color.GREEN);
+                caldroidFragment.setBackgroundDrawableForDate(green, date);
+                if(startdateset==false){
+                    startDate=date;
+                    startdateset=true;
+                    Calendar calendar = new GregorianCalendar();
+                    calendar.setTime(date);
+
+                    int i=-1;
+                    while (i>-365) {
+                        calendar.add(Calendar.DATE, -1);
+                        Date result = calendar.getTime();
+                        disabledates.add(formatter.format(result));
+                        i--;
+                    }
+
+                    caldroidFragment.setDisableDatesFromString(disabledates,"dd/MM/yyyy");
+                    ((Button)findViewById(R.id.btncustom)).setText("TO");
+
+                }else if(enddateset==false){
+                    endDate=date;
+                    datesBetween(startDate,endDate);
+                    ColorDrawable red = new ColorDrawable(Color.CYAN);
+
+                    colordatesbetween(startDate,endDate,red);
+
+                    enddateset=true;
+
+                }else{
+                    ColorDrawable white = new ColorDrawable(Color.WHITE);
+                    caldroidFragment.setBackgroundDrawableForDate(white,startDate);
+
+                    caldroidFragment.setBackgroundDrawableForDate(white,endDate);
+                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("ddMMyyyy");
+                    colordatesbetween(startDate,endDate,white);
+
+                    startDate=null;
+                    endDate=null;
+                    startdateset=false;
+                    enddateset=false;
+                    Toast.makeText(GenerateReport.this,"Select Dates Again",Toast.LENGTH_LONG).show();
+                    caldroidFragment.clearDisableDates();
+                    caldroidFragment.refreshView();
+                }
+                caldroidFragment.refreshView();
+            }
+
+
+
+        };
+
+        // Setup Caldroid
+        caldroidFragment.setCaldroidListener(listener);
+
+
     }
-    @RequiresApi(api = Build.VERSION_CODES.O)
+
+    private void colordatesbetween(Date startDate, Date endDate,ColorDrawable drawable) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(startDate);
+
+        Calendar endCalendar = new GregorianCalendar();
+        endCalendar.setTime(endDate);
+
+        while (calendar.before(endCalendar)) {
+            Date result = calendar.getTime();
+
+            caldroidFragment.setBackgroundDrawableForDate(drawable,result);
+            calendar.add(Calendar.DATE, 1);
+        }
+    }
+
     public void onClick(View v)
     {
 
@@ -69,15 +175,9 @@ public class GenerateReport extends Activity implements View.OnClickListener
         switch (v.getId())
         {
             case R.id.btnpreparesheet:
-                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("ddMMyyyy");
 
-                String sstartdate=startdate.getText().toString();
-                String senddate=enddate.getText().toString();
 
-                LocalDate start= LocalDate.of(Integer.parseInt(sstartdate.substring(4,8)), Integer.parseInt(sstartdate.substring(2,4)), Integer.parseInt(sstartdate.substring(0,2)));
-                LocalDate end= LocalDate.of(Integer.parseInt(senddate.substring(4,8)), Integer.parseInt(senddate.substring(2,4)), Integer.parseInt(senddate.substring(0,2)));
-
-                datesBetween(start,end);
+                datesBetween(startDate,endDate);
                 DatabaseReference mydatabase=databaseReference;
 
                 mydatabase.addValueEventListener(new ValueEventListener() {
@@ -130,15 +230,18 @@ public class GenerateReport extends Activity implements View.OnClickListener
 
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.O)
-    private  void datesBetween(LocalDate start, LocalDate end) {
-        for (LocalDate date = start; date.isBefore(end); date = date.plusDays(1)) {
-            String sdate=date.toString();
-            String year=sdate.substring(0,4);
-            String month=sdate.substring(5,7);
-            String day=sdate.substring(8,10);
-            arr.put(day+month+year,true);
-            System.out.println(date.toString());
+    private  void datesBetween(Date startDate, Date endDate) {
+        Calendar calendar = new GregorianCalendar();
+        calendar.setTime(startDate);
+
+        Calendar endCalendar = new GregorianCalendar();
+        endCalendar.setTime(endDate);
+        final SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy");
+
+        while (calendar.before(endCalendar)) {
+            Date result = calendar.getTime();
+            arr.put(formatter.format(result),true);
+            calendar.add(Calendar.DATE, 1);
         }
 
     }
@@ -231,16 +334,20 @@ public class GenerateReport extends Activity implements View.OnClickListener
                      c.setCellValue(data.get(keys.get(i - 1)).getMsa_name());
                      break;
                  case 7:
-
-                     c.setCellValue(data.get(keys.get(i - 1)).getMsa_date());
+                     String sdate=data.get(keys.get(i - 1)).getMsa_date();
+                     sdate=dateformat(sdate);
+                     c.setCellValue(sdate);
                      break;
                  case 8:
-
-                     c.setCellValue(data.get(keys.get(i - 1)).getStore_sell_in_date());
+                     String ssdate=data.get(keys.get(i - 1)).getStore_sell_in_date();
+                     ssdate=dateformat(ssdate);
+                     c.setCellValue(ssdate);
                      break;
                  case 9:
+                     String sssdate=data.get(keys.get(i - 1)).getStore_sell_out_date();
+                     sssdate=dateformat(sssdate);
 
-                     c.setCellValue(data.get(keys.get(i - 1)).getStore_sell_out_date());
+                     c.setCellValue(sssdate);
                      break;
 
              }
@@ -268,6 +375,7 @@ public class GenerateReport extends Activity implements View.OnClickListener
             } catch (Exception ex) {
             }
         }
+        Toast.makeText(GenerateReport.this,"Report Saved",Toast.LENGTH_LONG).show();
         return success;
     }
 
@@ -287,6 +395,30 @@ public class GenerateReport extends Activity implements View.OnClickListener
             return true;
         }
         return false;
+    }
+    private void setCustomResourceForDates() {
+        Calendar cal = Calendar.getInstance();
+
+        // Min date is last 7 days
+        cal.add(Calendar.DATE, -700 );
+        Date blueDate = cal.getTime();
+
+        // Max date is next 7 days
+        cal = Calendar.getInstance();
+        cal.add(Calendar.DATE, 7);
+        Date greenDate = cal.getTime();
+
+        if (caldroidFragment != null) {
+            ColorDrawable blue = new ColorDrawable(getResources().getColor(R.color.caldroid_sky_blue));
+            ColorDrawable green = new ColorDrawable(Color.GREEN);
+            caldroidFragment.setBackgroundDrawableForDate(blue, blueDate);
+            caldroidFragment.setBackgroundDrawableForDate(green, greenDate);
+            caldroidFragment.setTextColorForDate(R.color.caldroid_white, blueDate);
+            caldroidFragment.setTextColorForDate(R.color.caldroid_white, greenDate);
+        }
+    }
+    public String dateformat(String date){
+        return date.substring(0,2)+"/"+date.substring(2,4)+"/"+date.substring(4);
     }
 }
 

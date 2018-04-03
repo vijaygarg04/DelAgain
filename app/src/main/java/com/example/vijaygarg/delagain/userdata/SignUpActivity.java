@@ -75,7 +75,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         final String sname=name.getText().toString().trim();
         final String snumber=number.getText().toString().trim();
-        final String suname=uname.getText().toString().trim()+"@del.com";
+        final String suname=uname.getText().toString().trim()+"@dell.com";
         final String spass=password.getText().toString().trim();
         mAuth.createUserWithEmailAndPassword(suname,spass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override

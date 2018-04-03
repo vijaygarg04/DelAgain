@@ -9,23 +9,8 @@
     android:background="@drawable/generatereportbuttondesign"
     android:layout_gravity="center"
     tools:context="com.example.vijaygarg.delagain.UserManagement">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="400dp"
-    android:layout_margin="10dp"
-    android:orientation="vertical">
-    <android.support.v7.widget.CardView
-        app:cardElevation="5dp"
-        app:cardCornerRadius="5dp"
-        android:background="@drawable/generatereportbuttondesign"
-        app:cardBackgroundColor="@drawable/generatereportbuttondesign"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
+
     <EditText
         android:gravity="center"
         android:layout_width="match_parent"
@@ -85,6 +70,3 @@
         android:text="update Data"
         android:id="@+id/btnUpdate"/>
         </LinearLayout>
-    </android.support.v7.widget.CardView>
-</LinearLayout>
-</LinearLayout>

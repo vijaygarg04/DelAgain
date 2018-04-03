@@ -2,6 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.vijaygarg.delagain">
 
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,7 +28,10 @@
         <activity android:name=".UserManagement" />
         <activity android:name=".DeleteUpdate" />
         <activity android:name=".Display" />
-        <activity android:name=".DisplayDevices"></activity>
+        <activity android:name=".DisplayDevices" />
+        <activity android:name=".Scheme" />
+        <activity android:name=".SchemeAddRemove" />
+        <activity android:name=".RemoveModel"></activity>
     </application>
 
 </manifest>

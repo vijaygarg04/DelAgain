@@ -8,20 +8,26 @@
     android:layout_gravity="center"
     android:padding="10dp"
     android:gravity="center"
+    android:background="@drawable/generatereportbuttondesign"
     tools:context="com.example.vijaygarg.delagain.DataEntry">
 <EditText
+    android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="serial tag"
     android:gravity="center"
     android:id="@+id/serialtag"/>
     <EditText
+
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="msa name"
         android:gravity="center"
         android:id="@+id/msaname"/>
     <EditText
+
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="model number"
@@ -29,6 +35,8 @@
         android:id="@+id/modelnumber"
         />
     <EditText
+
+        android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="bundlecode"
@@ -36,6 +44,8 @@
         android:id="@+id/bundlecode"/>
 
     <LinearLayout
+
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <Button
@@ -44,12 +54,14 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="ADD To List"
+        android:background="#FFA808"
         android:layout_marginRight="10dp"
         android:id="@+id/addtolist"/>
         <Button
             android:layout_marginRight="20dp"
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:background="#08FF08"
             android:layout_height="wrap_content"
             android:text="SUBMIT List"
             android:id="@+id/submitlist"
@@ -57,6 +69,7 @@
     </LinearLayout>
 
     <android.support.v7.widget.RecyclerView
+        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:id="@+id/rv"
         android:layout_height="wrap_content">

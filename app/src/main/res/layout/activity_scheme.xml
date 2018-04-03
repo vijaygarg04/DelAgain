@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:background="@drawable/generatereportbuttondesign"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent">
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:layout_height="match_parent"
+    android:layout_margin="10dp"
+    tools:context="com.example.vijaygarg.delagain.Scheme">
+    <EditText
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="TITLE"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:id="@+id/schemetitle"/>
+    <EditText
+
+        android:textSize="18sp"
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="DISCRIPTION"
+        android:gravity="center"
+        android:id="@+id/schemediscription"/>
+    <ImageView
+
+        android:layout_margin="10dp"
+        android:minHeight="200dp"
+        android:minWidth="200dp"
+        android:layout_gravity="center"
+        android:src="@mipmap/ic_launcher_round"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/schemeimageview"
+        android:scaleType="centerInside"
+        android:adjustViewBounds="true"
+        />
+    <Button
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="UPLOAD SCHEME"
+        android:id="@+id/uploadscheme"/>
+
+</LinearLayout>
+</ScrollView>

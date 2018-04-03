@@ -15,17 +15,19 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    android:padding="5dp"
+    android:paddingTop="100dp"
+    android:paddingBottom="50dp"
     tools:context="com.example.vijaygarg.delagain.Welcome"
     android:background="@drawable/generatereportbuttondesign">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
     <android.support.v7.widget.CardView
         android:layout_margin="10dp"
         android:layout_width="0dp"
         android:layout_weight="1.2"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         app:cardElevation="8dp"
         app:cardCornerRadius="10dp"
         app:cardBackgroundColor="#FFF0FF">
@@ -43,7 +45,7 @@
         android:layout_margin="10dp"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         app:cardElevation="15dp"
         app:cardCornerRadius="10dp"
         app:cardBackgroundColor="#FFF0FF">
@@ -61,12 +63,13 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
         <android.support.v7.widget.CardView
             android:layout_margin="10dp"
             android:layout_width="0dp"
             android:layout_weight="1.2"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             app:cardElevation="8dp"
             app:cardCornerRadius="10dp"
             app:cardBackgroundColor="#FFF0FF">
@@ -87,7 +90,7 @@
             android:layout_margin="10dp"
             android:layout_width="0dp"
             android:layout_weight="1"
-            android:layout_height="80dp"
+            android:layout_height="70dp"
             app:cardElevation="8dp"
             app:cardCornerRadius="10dp"
             app:cardBackgroundColor="#FFF0FF">
@@ -98,7 +101,7 @@
                 android:fontFamily="@string/bottom_sheet_behavior"
                 android:textColor="#ffffff"
                 android:background="#0A58B1"
-
+                android:id="@+id/btnscheme"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Scheme"/>
@@ -106,12 +109,13 @@
     </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="10dp">
     <android.support.v7.widget.CardView
         android:layout_margin="10dp"
         android:layout_width="0dp"
         android:layout_weight="1.2"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         app:cardElevation="8dp"
         app:cardCornerRadius="10dp"
         app:cardBackgroundColor="#FFF0FF">
@@ -131,7 +135,7 @@
         android:layout_margin="10dp"
         android:layout_width="0dp"
         android:layout_weight="1"
-        android:layout_height="80dp"
+        android:layout_height="70dp"
         app:cardElevation="8dp"
         app:cardCornerRadius="10dp"
         app:cardBackgroundColor="#FFF0FF">
@@ -153,12 +157,13 @@
     <android.support.v7.widget.CardView
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         app:cardElevation="8dp"
         app:cardCornerRadius="10dp"
         app:cardBackgroundColor="#FFF0FF">
 
     <Button
+        android:paddingBottom="10dp"
         android:textSize="25sp"
         android:fontFamily="@string/bottom_sheet_behavior"
         android:textColor="#ffffff"
@@ -173,12 +178,13 @@
     <android.support.v7.widget.CardView
         android:layout_margin="10dp"
         android:layout_width="match_parent"
-        android:layout_height="80dp"
+        android:layout_height="60dp"
         app:cardElevation="8dp"
         app:cardCornerRadius="10dp"
         app:cardBackgroundColor="#FFF0FF">
 
     <Button
+        android:paddingBottom="10dp"
         android:textSize="25sp"
         android:fontFamily="@string/bottom_sheet_behavior"
         android:textColor="#ffffff"
@@ -187,8 +193,29 @@
         android:layout_height="match_parent"
         android:text="Model"
         android:id="@+id/welcomebtnmodel"/>
+
 </android.support.v7.widget.CardView>
 
+    <android.support.v7.widget.CardView
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#FFF0FF">
+
+        <Button
+            android:paddingBottom="10dp"
+            android:textSize="25sp"
+            android:fontFamily="@string/bottom_sheet_behavior"
+            android:textColor="#ffffff"
+            android:background="#FF2800"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="LOG OUT"
+            android:id="@+id/logout"/>
+
+    </android.support.v7.widget.CardView>
 
 
 </LinearLayout>

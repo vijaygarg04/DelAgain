@@ -4,10 +4,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="match_parent"
+    android:background="@drawable/generatereportbuttondesign">
+<LinearLayout
+    android:layout_marginTop="10dp"
     android:layout_width="match_parent"
     android:orientation="vertical"
     android:layout_height="match_parent"
@@ -18,10 +18,19 @@
         android:id="@+id/rvdisplayrequest">
 
     </android.support.v7.widget.RecyclerView>
-<Button
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:text="Show List Of Display Devices"
-    android:id="@+id/btnshowdisplaydevice"/>
+
+
+
+    <Button
+        android:layout_margin="5dp"
+        android:background="#9AFF8F"
+        android:textSize="18sp"
+        android:id="@+id/btnshowdisplaydevice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="20dp"
+        android:text="Show List Of Display Devices" />
+
 </LinearLayout>
 </ScrollView>
