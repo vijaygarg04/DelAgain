@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.vijaygarg.delagain.userdata.LogInActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Welcome extends AppCompatActivity {
@@ -28,8 +29,7 @@ private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=1001;
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
                     MY_PERMISSIONS_REQUEST_READ_CONTACTS);
 
-            // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-            // app-defined int constant
+
         }
         scheme=findViewById(R.id.btnscheme);
         model=findViewById(R.id.welcomebtnmodel);
@@ -85,7 +85,9 @@ private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=1001;
     public boolean onOptionsItemSelected(MenuItem item) {
     if(item.getItemId()==R.id.logoutmenu){
      firebaseAuth.signOut();
+     startActivity(new Intent(Welcome.this, LogInActivity.class));
      finish();
+
     }
 
 return true;
@@ -103,5 +105,16 @@ return true;
                 return;
             }
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        finish();
     }
 }

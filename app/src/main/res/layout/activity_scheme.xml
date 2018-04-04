@@ -17,6 +17,9 @@
     android:layout_margin="10dp"
     tools:context="com.example.vijaygarg.delagain.Scheme">
     <EditText
+        android:minHeight="50dp"
+        android:background="@drawable/edittextdesign"
+
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -25,7 +28,8 @@
         android:gravity="center"
         android:id="@+id/schemetitle"/>
     <EditText
-
+        android:minHeight="50dp"
+        android:background="@drawable/edittextdesign"
         android:textSize="18sp"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
@@ -47,6 +51,9 @@
         android:adjustViewBounds="true"
         />
     <Button
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:background="#00FF00"
         android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

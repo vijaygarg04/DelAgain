@@ -10,7 +10,7 @@ public class PromoterModel {
     String contact;
     String date;
     String store;
-    String pasword="default";
+    String password="default";
     public PromoterModel(String name, String id, String contact, String date, String store) {
         this.name = name;
         this.id = id;

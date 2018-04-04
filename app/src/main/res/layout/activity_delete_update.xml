@@ -25,15 +25,20 @@
 </android.support.v7.widget.RecyclerView>
 
     <EditText
+
+        android:minHeight="50dp"
+        android:background="@drawable/edittextdesign"
         android:gravity="center"
         android:textSize="16sp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Enter id to be updated"
         android:id="@+id/updateid"/>
     <EditText
-        android:layout_marginTop="10dp"
+        android:minHeight="50dp"
+        android:background="@drawable/edittextdesign"
+        android:layout_marginTop="15dp"
         android:visibility="gone"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -43,8 +48,10 @@
 
 
     <EditText
+        android:minHeight="50dp"
+        android:background="@drawable/edittextdesign"
 
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:visibility="gone"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -53,8 +60,10 @@
         android:id="@+id/storeassigned"/>
 
     <EditText
+        android:minHeight="50dp"
+        android:background="@drawable/edittextdesign"
 
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:visibility="gone"
         android:gravity="center"
         android:layout_width="match_parent"
@@ -62,8 +71,10 @@
         android:id="@+id/contactnumber"
         android:hint="Contact Number"/>
     <EditText
+        android:minHeight="50dp"
+        android:background="@drawable/edittextdesign"
 
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="15dp"
         android:visibility="gone"
         android:gravity="center"
         android:layout_width="match_parent"

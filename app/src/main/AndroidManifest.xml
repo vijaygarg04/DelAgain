@@ -31,7 +31,9 @@
         <activity android:name=".DisplayDevices" />
         <activity android:name=".Scheme" />
         <activity android:name=".SchemeAddRemove" />
-        <activity android:name=".RemoveModel"></activity>
+        <activity android:name=".RemoveModel" />
+        <activity android:name=".CompetitiveReporting" />
+        <activity android:name=".CompetitiveReportingData"></activity>
     </application>
 
 </manifest>

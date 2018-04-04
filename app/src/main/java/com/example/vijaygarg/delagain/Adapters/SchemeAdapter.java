@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 /**
@@ -50,34 +51,40 @@ public class SchemeAdapter extends RecyclerView.Adapter<SchemeAdapter.MyViewHold
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
         holder.title.setText(arr.get(position).getTitle());
         holder.discription.setText(arr.get(position).getDescription());
-        holder.date.setText(arr.get(position).getDate());
+
+        holder.date.setText(formatdate(arr.get(position).getDate()));
         holder.removebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                arr.get(position).setIs_active(false);
-                DatabaseReference mydr=firebaseDatabase.child("schemes");
-                mydr.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-                            for(DataSnapshot dataSnapshot2:dataSnapshot1.getChildren()){
-                                SchemeModel schemeModel=dataSnapshot2.getValue(SchemeModel.class);
+                removeitem(holder,position);
+            }
+        });
+    }
+    public void removeitem(final SchemeAdapter.MyViewHolder holder, final int position ){
+        DatabaseReference mydr=firebaseDatabase.child("schemes");
+        final String stitle=arr.get(position).getTitle();
+        final String sdate=arr.get(position).getDate();
 
-                                if(schemeModel.getTitle().equals(holder.title.getText().toString())&&schemeModel.getIs_active()){
-                                dataSnapshot2.getRef().child("is_active").setValue(false);
-                                arr.remove(position);
-                                }
-                            }
+        mydr.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                    for(DataSnapshot dataSnapshot2:dataSnapshot1.getChildren()){
+                        SchemeModel schemeModel=dataSnapshot2.getValue(SchemeModel.class);
+
+                        if(schemeModel.getTitle().equals(stitle)&&schemeModel.getIs_active()&&sdate.equals(schemeModel.getDate())){
+                            dataSnapshot2.getRef().child("is_active").setValue(false);
+                            arr.remove(position);
+
                         }
-
-                        notifyDataSetChanged();
                     }
+                }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
+                notifyDataSetChanged();
+            }
 
-                    }
-                });
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
 
             }
         });
@@ -86,6 +93,9 @@ public class SchemeAdapter extends RecyclerView.Adapter<SchemeAdapter.MyViewHold
     @Override
     public int getItemCount() {
         return arr.size();
+    }
+    public String formatdate(String date){
+        return date.substring(0,2)+"/"+date.substring(2,4)+"/"+date.substring(4);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{

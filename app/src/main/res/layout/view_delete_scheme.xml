@@ -7,16 +7,18 @@
     app:cardElevation="8dp"
     android:layout_margin="10dp">
     <LinearLayout
+        android:padding="10dp"
         android:layout_width="match_parent"
         android:orientation="vertical"
         android:layout_height="wrap_content">
         <LinearLayout
             android:layout_marginTop="5dp"
+
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.5"
+                android:layout_weight="0.7"
                 android:text="TITLE"
                 android:textSize="18sp"
                 android:gravity="left"
@@ -36,7 +38,7 @@
             android:layout_height="wrap_content">
             <TextView
                 android:layout_width="0dp"
-                android:layout_weight="0.5"
+                android:layout_weight="0.7"
                 android:text="DISCRIPTION"
                 android:textSize="18sp"
                 android:gravity="left"
@@ -72,6 +74,7 @@
         </LinearLayout>
 
         <Button
+
             android:layout_margin="10dp"
             android:text="REMOVE SCHEME"
             android:background="#FF0000"

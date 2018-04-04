@@ -47,10 +47,15 @@ public class RemoveModel extends AppCompatActivity {
     }
 
     public void getSchemesModel() {
-DatabaseReference mydr=firebaseDatabase.child("schemes");
+        int size=arr.size();
+        for(int i=size-1;i>=0;i--){
+            arr.remove(i);
+        }
+final DatabaseReference mydr=firebaseDatabase.child("schemes");
 mydr.addValueEventListener(new ValueEventListener() {
     @Override
     public void onDataChange(DataSnapshot dataSnapshot) {
+
         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
             for(DataSnapshot dataSnapshot2:dataSnapshot1.getChildren()){
                 SchemeModel schemeModel=dataSnapshot2.getValue(SchemeModel.class);
@@ -61,6 +66,8 @@ mydr.addValueEventListener(new ValueEventListener() {
             }
         }
         schemeAdapter.notifyDataSetChanged();
+        mydr.removeEventListener(this);
+
     }
 
     @Override

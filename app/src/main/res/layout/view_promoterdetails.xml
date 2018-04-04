@@ -6,7 +6,6 @@
     android:layout_margin="5dp"
     app:cardCornerRadius="8dp"
     app:cardElevation="6dp"
-    app:cardBackgroundColor="#EBDBB5"
     android:background="#EBDBB5">
     <LinearLayout
         android:layout_margin="5dp"
@@ -133,6 +132,7 @@
             android:text="Date"
             android:id="@+id/date"/>
         </LinearLayout>
+
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

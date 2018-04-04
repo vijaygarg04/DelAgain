@@ -11,7 +11,10 @@
     android:background="@drawable/generatereportbuttondesign"
     tools:context="com.example.vijaygarg.delagain.DataEntry">
 <EditText
-    android:layout_marginTop="10dp"
+
+    android:minHeight="50dp"
+    android:background="@drawable/edittextdesign"
+    android:layout_marginTop="15dp"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:hint="serial tag"
@@ -19,7 +22,9 @@
     android:id="@+id/serialtag"/>
     <EditText
 
-        android:layout_marginTop="10dp"
+        android:minHeight="50dp"
+        android:background="@drawable/edittextdesign"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="msa name"
@@ -27,7 +32,9 @@
         android:id="@+id/msaname"/>
     <EditText
 
-        android:layout_marginTop="10dp"
+        android:minHeight="50dp"
+        android:background="@drawable/edittextdesign"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="model number"
@@ -36,7 +43,9 @@
         />
     <EditText
 
-        android:layout_marginTop="10dp"
+        android:minHeight="50dp"
+        android:background="@drawable/edittextdesign"
+        android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="bundlecode"
@@ -45,7 +54,7 @@
 
     <LinearLayout
 
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
     <Button

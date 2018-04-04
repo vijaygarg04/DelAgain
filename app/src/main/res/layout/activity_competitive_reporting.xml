@@ -7,7 +7,7 @@
     android:gravity="center"
     android:background="#FFFFFF"
     android:orientation="vertical"
-    tools:context="com.example.vijaygarg.delagain.GenerateReport">
+    tools:context="com.example.vijaygarg.delagain.CompetitiveReporting">
     <LinearLayout
         android:layout_margin="10dp"
         android:layout_width="match_parent"
@@ -45,14 +45,14 @@
                 </LinearLayout>
 
 
-    <Button
+                <Button
 
-        android:layout_marginTop="15dp"
-        android:text="Generate Reports"
-        android:background="#B2F3B9"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/btnpreparesheet"/>
+                    android:layout_marginTop="15dp"
+                    android:text="Move To Results"
+                    android:background="#B2F3B9"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/btnpreparesheet"/>
                 <TextView
                     android:layout_marginTop="15dp"
                     android:layout_width="match_parent"

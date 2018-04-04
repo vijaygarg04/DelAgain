@@ -16,6 +16,9 @@
         android:orientation="vertical">
 
         <EditText
+            android:minHeight="50dp"
+            android:background="@drawable/edittextdesign"
+
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"
@@ -23,11 +26,18 @@
             android:gravity="center"
             android:id="@+id/etuserid"/>
         <EditText
+
+            android:layout_marginTop="20dp"
+            android:minHeight="50dp"
+            android:background="@drawable/edittextdesign"
+
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="0.5"
             android:hint="Password"
             android:gravity="center"
+            android:inputType="textPassword"
+
             android:id="@+id/etpassword"/>
         <Button
             android:layout_marginTop="20dp"

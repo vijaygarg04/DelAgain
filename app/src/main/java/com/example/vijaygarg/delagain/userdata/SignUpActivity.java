@@ -55,7 +55,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     mydb.setValue(ud);
                     Toast.makeText(SignUpActivity.this,"User Acccount Created successfully",Toast.LENGTH_LONG).show();
                     startActivity(new Intent(SignUpActivity.this,Welcome.class));
-                    startActivity(new Intent(SignUpActivity.this,Welcome.class));
+                    finish();
 
                 }else{
                 }
@@ -66,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             public void onClick(View view) {
                 Intent i=new Intent(SignUpActivity.this,LogInActivity.class);
                 startActivity(i);
-
+                finish();
             }
         });
     }

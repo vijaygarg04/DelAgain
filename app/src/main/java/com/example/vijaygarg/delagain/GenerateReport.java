@@ -53,14 +53,12 @@ import com.google.firebase.database.ValueEventListener;
 public class GenerateReport extends AppCompatActivity implements View.OnClickListener
 {
     Button writeExcelButton;
-    static String TAG = "ExelLog";
+    static String TAG = "ExcelLog";
     DatabaseReference databaseReference;
     HashMap<String,ObjectModel> data;
     HashMap<String,Boolean>arr;
     HashMap<String ,Boolean>servicetag;
-    HashMap<Date, Drawable>datesbetween;
     ArrayList<String> disabledates;
-    private boolean undo = false;
     private CaldroidFragment caldroidFragment;
     Date startDate,endDate;
     boolean startdateset=false;
@@ -111,22 +109,27 @@ public class GenerateReport extends AppCompatActivity implements View.OnClickLis
                         disabledates.add(formatter.format(result));
                         i--;
                     }
+                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
 
                     caldroidFragment.setDisableDatesFromString(disabledates,"dd/MM/yyyy");
-                    ((Button)findViewById(R.id.btncustom)).setText("TO");
+                    ((Button)findViewById(R.id.btncustom)).setText(simpleDateFormat.format(startDate).toString()+"   TO   - - / - -/ - - - -");
 
                 }else if(enddateset==false){
                     endDate=date;
                     datesBetween(startDate,endDate);
                     ColorDrawable red = new ColorDrawable(Color.CYAN);
+                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
+
 
                     colordatesbetween(startDate,endDate,red);
+                    ((Button)findViewById(R.id.btncustom)).setText(simpleDateFormat.format(startDate).toString()+"   TO   "+simpleDateFormat.format(endDate).toString());
 
                     enddateset=true;
 
                 }else{
                     ColorDrawable white = new ColorDrawable(Color.WHITE);
                     caldroidFragment.setBackgroundDrawableForDate(white,startDate);
+                    ((Button)findViewById(R.id.btncustom)).setText("-- / --/ ----   TO   -- / --/ ----");
 
                     caldroidFragment.setBackgroundDrawableForDate(white,endDate);
                     SimpleDateFormat simpleDateFormat=new SimpleDateFormat("ddMMyyyy");
@@ -219,7 +222,10 @@ public class GenerateReport extends AppCompatActivity implements View.OnClickLis
                         data.put(dataSnapshot1.getKey(),dataSnapshot1.getValue(ObjectModel.class));
                     }
                 }
-                saveExcelFile(GenerateReport.this,"myExcel2.xls");
+                Date date=new Date();
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd_MM_yyyy");
+
+                saveExcelFile(GenerateReport.this,simpleDateFormat.format(date)+"_report.xls");
             }
 
             @Override
@@ -231,6 +237,7 @@ public class GenerateReport extends AppCompatActivity implements View.OnClickLis
     }
 
     private  void datesBetween(Date startDate, Date endDate) {
+
         Calendar calendar = new GregorianCalendar();
         calendar.setTime(startDate);
 
@@ -266,7 +273,6 @@ public class GenerateReport extends AppCompatActivity implements View.OnClickLis
         sheet1 = wb.createSheet("Reporting");
 
 
-        // Generate column headings
         ArrayList<String> keys=new ArrayList<>(data.keySet());
         sheet1.setColumnWidth(0, (15 * 500));
         sheet1.setColumnWidth(1, (15 * 500));

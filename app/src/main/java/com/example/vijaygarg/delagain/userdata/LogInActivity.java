@@ -65,6 +65,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
                     startActivity(new Intent(LogInActivity.this,Welcome.class));
+                    finish();
                 }else{
                     Toast.makeText(getApplicationContext(),"Log In Failed",Toast.LENGTH_LONG).show();
                 }
