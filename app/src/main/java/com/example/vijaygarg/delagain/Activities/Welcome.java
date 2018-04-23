@@ -1,6 +1,5 @@
-package com.example.vijaygarg.delagain;
+package com.example.vijaygarg.delagain.Activities;
 
-import android.*;
 import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -12,18 +11,20 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.vijaygarg.delagain.*;
+import com.example.vijaygarg.delagain.R;
 import com.example.vijaygarg.delagain.userdata.LogInActivity;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Welcome extends AppCompatActivity {
 
-Button model,dataentry,generatereport,usermanagement,display,scheme;
+Button model,dataentry,generatereport,usermanagement,display,scheme,comp,storeadd,chat_button;
 FirebaseAuth firebaseAuth;
 private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=1001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_welcome);
+        setContentView(com.example.vijaygarg.delagain.R.layout.activity_welcome);
         if (checkSelfPermission(android.Manifest.permission.READ_CONTACTS)
                 != PackageManager.PERMISSION_GRANTED) {
             requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
@@ -31,10 +32,32 @@ private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=1001;
 
 
         }
+        chat_button = (Button)findViewById(R.id.chat_button);
+        chat_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            Intent intent = new Intent(Welcome.this,ChatActivity.class);
+            startActivity(intent);
+            }
+        });
         scheme=findViewById(R.id.btnscheme);
         model=findViewById(R.id.welcomebtnmodel);
         usermanagement=findViewById(R.id.usermanagement);
         display=findViewById(R.id.display);
+        comp=findViewById(R.id.comp);
+        storeadd=findViewById(R.id.store_add);
+        storeadd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Welcome.this,StoreAdd.class));
+            }
+        });
+        comp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(new Intent(Welcome.this,CompetitiveReporting.class));
+            }
+        });
         usermanagement.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -73,6 +96,7 @@ private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=1001;
                 startActivity(new Intent(Welcome.this,SchemeAddRemove.class));
             }
         });
+
 
         firebaseAuth=FirebaseAuth.getInstance();
     }

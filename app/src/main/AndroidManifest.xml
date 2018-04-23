@@ -20,20 +20,23 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Welcome" />
+        <activity android:name=".Activities.Welcome" />
         <activity android:name=".userdata.SignUpActivity" />
         <activity android:name=".AddRemoveModel" />
-        <activity android:name=".DataEntry" />
-        <activity android:name=".GenerateReport" />
-        <activity android:name=".UserManagement" />
-        <activity android:name=".DeleteUpdate" />
-        <activity android:name=".Display" />
-        <activity android:name=".DisplayDevices" />
-        <activity android:name=".Scheme" />
-        <activity android:name=".SchemeAddRemove" />
-        <activity android:name=".RemoveModel" />
-        <activity android:name=".CompetitiveReporting" />
-        <activity android:name=".CompetitiveReportingData"></activity>
+        <activity android:name=".Activities.DataEntry" />
+        <activity android:name=".Activities.GenerateReport" />
+        <activity android:name=".Activities.UserManagement" />
+        <activity android:name=".Activities.DeleteUpdate" />
+        <activity android:name=".Activities.Display" />
+        <activity android:name=".Activities.DisplayDevices" />
+        <activity android:name=".Activities.Scheme" />
+        <activity android:name=".Activities.SchemeAddRemove" />
+        <activity android:name=".Activities.RemoveModel" />
+        <activity android:name=".Activities.CompetitiveReporting" />
+        <activity android:name=".Activities.CompetitiveReportingData" />
+        <activity android:name=".Activities.MsaAdd" />
+        <activity android:name=".Activities.ChatActivity" />
+        <activity android:name=".Activities.StoreList"></activity>
     </application>
 
 </manifest>

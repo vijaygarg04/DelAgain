@@ -9,7 +9,7 @@
     android:padding="10dp"
     android:gravity="center"
     android:background="@drawable/generatereportbuttondesign"
-    tools:context="com.example.vijaygarg.delagain.DataEntry">
+    tools:context="com.example.vijaygarg.delagain.Activities.DataEntry">
 <EditText
 
     android:minHeight="50dp"

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context="com.example.vijaygarg.delagain.SchemeAddRemove">
+    tools:context="com.example.vijaygarg.delagain.Activities.SchemeAddRemove">
     <android.support.v7.widget.CardView
         android:layout_margin="10dp"
         app:cardElevation="5dp"

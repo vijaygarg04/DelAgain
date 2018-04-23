@@ -9,10 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.vijaygarg.delagain.Model.ObjectModel;
 import com.example.vijaygarg.delagain.Model.PromoterModel;
 import com.example.vijaygarg.delagain.R;
 
@@ -45,10 +43,10 @@ public class PromoterAdapter extends RecyclerView.Adapter<PromoterAdapter.MyView
         ArrayList<String>arr=new ArrayList<>(arr1.keySet());
 
         holder.name.setText(arr1.get(arr.get(position)).getName());
-        holder.id.setText(arr1.get(arr.get(position)).getId());
-        holder.store.setText(arr1.get(arr.get(position)).getStore());
+        holder.id.setText(arr1.get(arr.get(position)).getPromoter_id());
+        holder.store.setText(arr1.get(arr.get(position)).getStore_id());
         holder.contact.setText(arr1.get(arr.get(position)).getContact());
-        holder.date.setText(arr1.get(arr.get(position)).getDate());
+        holder.date.setText(arr1.get(arr.get(position)).getDate_of_joining());
 
 
     }

@@ -9,7 +9,7 @@
     android:padding="10dp"
     android:background="@drawable/generatereportbuttondesign"
     android:layout_gravity="center"
-    tools:context="com.example.vijaygarg.delagain.UserManagement">
+    tools:context="com.example.vijaygarg.delagain.Activities.UserManagement">
 
 
     <EditText

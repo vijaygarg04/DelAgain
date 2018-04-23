@@ -1,10 +1,12 @@
-package com.example.vijaygarg.delagain;
+package com.example.vijaygarg.delagain.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+
+import com.example.vijaygarg.delagain.R;
 
 public class SchemeAddRemove extends AppCompatActivity {
 Button schemeadd,schemeremove;

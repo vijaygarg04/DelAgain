@@ -1,4 +1,4 @@
-package com.example.vijaygarg.delagain;
+package com.example.vijaygarg.delagain.Activities;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -10,14 +10,13 @@ import android.widget.EditText;
 
 import com.example.vijaygarg.delagain.Adapters.PromoterAdapter;
 import com.example.vijaygarg.delagain.Model.PromoterModel;
-import com.google.firebase.database.ChildEventListener;
+import com.example.vijaygarg.delagain.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class DeleteUpdate extends AppCompatActivity {
@@ -90,8 +89,8 @@ public class DeleteUpdate extends AppCompatActivity {
                             if (dataSnapshot1.getKey().equals(iod)) {
                                 PromoterModel promoterModel = dataSnapshot1.getValue(PromoterModel.class);
                                 sname[0] = promoterModel.getName();
-                                sstore[0] = promoterModel.getStore();
-                                sdate[0] = promoterModel.getDate();
+                                sstore[0] = promoterModel.getStore_id();
+                                sdate[0] = promoterModel.getDate_of_joining();
                                 scontact[0] = promoterModel.getContact();
                                 databaseReference.child(idold.getText().toString()).setValue(null);
 
@@ -130,7 +129,7 @@ public class DeleteUpdate extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-                    data.put(dataSnapshot1.getValue(PromoterModel.class).getId(),dataSnapshot1.getValue(PromoterModel.class));
+                    data.put(dataSnapshot1.getValue(PromoterModel.class).getPromoter_id(),dataSnapshot1.getValue(PromoterModel.class));
                 }
                 promoterAdapter.notifyDataSetChanged();
             }

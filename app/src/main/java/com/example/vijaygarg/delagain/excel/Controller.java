@@ -12,27 +12,10 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 
-import android.support.annotation.NonNull;
-import android.util.Log;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-
-import android.support.annotation.NonNull;
-import android.util.Log;
-
 import com.example.vijaygarg.delagain.Model.ObjectModel;
 import com.squareup.okhttp.OkHttpClient;
 import com.squareup.okhttp.Request;
 import com.squareup.okhttp.Response;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.io.IOException;
-import java.util.ArrayList;
 
 
 public class Controller {
@@ -56,7 +39,7 @@ public class Controller {
             msadate=objectModel.getMsa_date();
             sellindate=objectModel.getStore_sell_in_date();
             selloutdate=objectModel.getStore_sell_out_date();
-            promotername=objectModel.getSold_by_promoter_name();
+            promotername=objectModel.getSold_by_promoter_id();
             modelnumber=objectModel.getModel_number();
             bundlecode=objectModel.getBundle_code();
             OkHttpClient client = new OkHttpClient();

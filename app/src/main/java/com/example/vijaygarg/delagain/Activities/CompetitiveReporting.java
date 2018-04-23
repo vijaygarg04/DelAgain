@@ -1,4 +1,4 @@
-package com.example.vijaygarg.delagain;
+package com.example.vijaygarg.delagain.Activities;
 
 import android.content.Intent;
 import android.graphics.Color;
@@ -11,11 +11,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.vijaygarg.delagain.Model.ObjectModel;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
+import com.example.vijaygarg.delagain.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
@@ -158,30 +156,7 @@ public class CompetitiveReporting extends AppCompatActivity implements View.OnCl
         }
     }
 
-    private void retrivedatanow() {
 
-        DatabaseReference mydb=FirebaseDatabase.getInstance().getReference().child("msa");
-        mydb.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
-                    if(servicetag.containsKey(dataSnapshot1.getKey())){
-                        data.put(dataSnapshot1.getKey(),dataSnapshot1.getValue(ObjectModel.class));
-                    }
-                }
-                Date date=new Date();
-                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd_MM_yyyy");
-
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
-            }
-        });
-
-    }
 
     private  void datesBetween(Date startDate, Date endDate) {
 

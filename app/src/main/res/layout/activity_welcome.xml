@@ -17,7 +17,7 @@
     android:gravity="center"
     android:paddingTop="20dp"
     android:paddingBottom="50dp"
-    tools:context="com.example.vijaygarg.delagain.Welcome"
+    tools:context="com.example.vijaygarg.delagain.Activities.Welcome"
     android:background="@drawable/generatereportbuttondesign">
     <TextView
         android:layout_width="match_parent"
@@ -49,7 +49,8 @@
             android:fontFamily="@string/bottom_sheet_behavior"
             android:textColor="#ffffff"
             android:background="#0A58B1"
-
+            android:gravity="center"
+            android:id="@+id/comp"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Competition Report"/>
@@ -71,6 +72,7 @@
     android:layout_height="match_parent"
     android:text="Generate Report"
     android:background="#0A58B1"
+    android:gravity="center"
     android:id="@+id/generatereport"/>
     </android.support.v7.widget.CardView>
     </LinearLayout>
@@ -110,7 +112,8 @@
                 android:fontFamily="@string/bottom_sheet_behavior"
                 android:textColor="#ffffff"
                 android:background="#0A58B1"
-
+                android:gravity="center"
+                android:id="@+id/chat_button"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:text="Chat"/>
@@ -131,6 +134,7 @@
                 android:fontFamily="@string/bottom_sheet_behavior"
                 android:textColor="#ffffff"
                 android:background="#0A58B1"
+                android:gravity="center"
                 android:id="@+id/btnscheme"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -170,7 +174,7 @@
         android:fontFamily="@string/bottom_sheet_behavior"
         android:textColor="#ffffff"
         android:background="#0A58B1"
-
+        android:gravity="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="User Management"
@@ -190,7 +194,7 @@
         android:fontFamily="@string/bottom_sheet_behavior"
         android:textColor="#ffffff"
         android:background="#0A58B1"
-
+        android:gravity="center"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:text="Data Entry"
@@ -220,6 +224,7 @@
     <Button
         android:paddingBottom="10dp"
         android:textSize="25sp"
+        android:gravity="center"
         android:fontFamily="@string/bottom_sheet_behavior"
         android:textColor="#ffffff"
         android:background="#0A58B1"
@@ -252,6 +257,7 @@
     <Button
         android:paddingBottom="10dp"
         android:textSize="25sp"
+        android:gravity="center"
         android:fontFamily="@string/bottom_sheet_behavior"
         android:textColor="#ffffff"
         android:background="#0A58B1"
@@ -261,6 +267,30 @@
         android:id="@+id/welcomebtnmodel"/>
 
 </android.support.v7.widget.CardView>
+    <android.support.v7.widget.CardView
+        android:layout_margin="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="#FFF0FF">
+
+        <Button
+            android:paddingBottom="10dp"
+            android:textSize="25sp"
+            android:gravity="center"
+            android:fontFamily="@string/bottom_sheet_behavior"
+            android:textColor="#ffffff"
+            android:background="#0A58B1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/store_add"
+            android:text="Store Add"/>
+    </android.support.v7.widget.CardView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#000000"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -276,6 +306,7 @@
         app:cardBackgroundColor="#FFF0FF">
 
         <Button
+            android:gravity="center"
             android:paddingBottom="10dp"
             android:textSize="25sp"
             android:fontFamily="@string/bottom_sheet_behavior"

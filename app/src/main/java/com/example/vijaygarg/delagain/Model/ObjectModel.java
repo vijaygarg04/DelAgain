@@ -9,21 +9,28 @@ public class ObjectModel{
     public String service_tag = "default";
     //2.)This is the name of the MSA which uploads products. It is uploaded by Admin. It can be empty also.
     public String msa_name = "default";
-    //3,4.)This is the name of the store which recieves the product from distributor. It can't be empty.
+    //3,4.)This is the name of the store_id which recieves the product from distributor. It can't be empty.
     public boolean store_name_set = false;
     public String store_name = "default";
-    //5,6.)This is the date when MSA enters the product, i.e. when admin enters the product into the app.
+    public String store_id="default";
+    //5,6.)This is the date_of_joining when MSA enters the product, i.e. when admin enters the product into the app.
     public boolean msa_date_set = false;
     public String msa_date = "default";
-    //7,8.)This is the data when store recieves the product from warehouse or MSA
+    //7,8.)This is the data when store_id recieves the product from warehouse or MSA
     public String store_sell_in_date = "default";
     public boolean store_sell_in_date_set = false;
-    //9,10.)This is the date whem the product is sold out from the store to the consumer.
+    //9,10.)This is the date_of_joining whem the product is sold out from the store_id to the consumer.
     public String store_sell_out_date = "default";
     public boolean store_sell_out_date_set = false;
     //11.)This is the model number of the product, would be set by the admin while entering the product into database.
     public String model_number= "default";
     //12.)Bundle Code
+    public String bundle_code= "default";
+    //13.)The person who sells the product. To be set in user app.
+    public String sold_by_promoter_id = "default";  //todo this is promoter id
+    public String sold_by_promoter_name="default";
+    public String display_request_result="default";
+    public boolean display_request=false;
 
     public String getDisplay_request_result() {
         return display_request_result;
@@ -41,12 +48,7 @@ public class ObjectModel{
         this.display_request = display_request;
     }
 
-    public String bundle_code= "default";
-    //13.)The person who sells the product. To be set in user app.
-    public String sold_by_promoter_name= "default";
 
-    public String display_request_result="default";
-    public boolean display_request=false;
     public ObjectModel(String service_tag, String msa_name, boolean msa_date_set, String msa_date, String model_number, String bundle_code) {
         this.service_tag = service_tag;
         this.msa_name = msa_name;
@@ -56,7 +58,7 @@ public class ObjectModel{
         this.bundle_code = bundle_code;
     }
 
-    public ObjectModel(String service_tag, String msa_name, boolean store_name_set, String store_name, boolean msa_date_set, String msa_date, String store_sell_in_date, boolean store_sell_in_date_set, String store_sell_out_date, boolean store_sell_out_date_set, String model_number, String bundle_code, String sold_by_promoter_name, String display_request_result, boolean display_request) {
+    public ObjectModel(String service_tag, String msa_name, boolean store_name_set, String store_name, boolean msa_date_set, String msa_date, String store_sell_in_date, boolean store_sell_in_date_set, String store_sell_out_date, boolean store_sell_out_date_set, String model_number, String bundle_code, String sold_by_promoter_id, String display_request_result, boolean display_request) {
         this.service_tag = service_tag;
         this.msa_name = msa_name;
         this.store_name_set = store_name_set;
@@ -69,12 +71,12 @@ public class ObjectModel{
         this.store_sell_out_date_set = store_sell_out_date_set;
         this.model_number = model_number;
         this.bundle_code = bundle_code;
-        this.sold_by_promoter_name = sold_by_promoter_name;
+        this.sold_by_promoter_id = sold_by_promoter_id;
         this.display_request_result = display_request_result;
         this.display_request = display_request;
     }
 
-    public ObjectModel(String service_tag, String msa_name, boolean store_name_set, String store_name, boolean msa_date_set, String msa_date, String store_sell_in_date, boolean store_sell_in_date_set, String store_sell_out_date, boolean store_sell_out_date_set, String model_number, String bundle_code, String sold_by_promoter_name) {
+    public ObjectModel(String service_tag, String msa_name, boolean store_name_set, String store_name, boolean msa_date_set, String msa_date, String store_sell_in_date, boolean store_sell_in_date_set, String store_sell_out_date, boolean store_sell_out_date_set, String model_number, String bundle_code, String sold_by_promoter_id) {
         this.service_tag = service_tag;
         this.msa_name = msa_name;
         this.store_name_set = store_name_set;
@@ -87,10 +89,26 @@ public class ObjectModel{
         this.store_sell_out_date_set = store_sell_out_date_set;
         this.model_number = model_number;
         this.bundle_code = bundle_code;
-        this.sold_by_promoter_name = sold_by_promoter_name;
+        this.sold_by_promoter_id = sold_by_promoter_id;
     }
 
     public ObjectModel() {
+    }
+
+    public String getStore_id() {
+        return store_id;
+    }
+
+    public void setStore_id(String store_id) {
+        this.store_id = store_id;
+    }
+
+    public String getSold_by_promoter_name() {
+        return sold_by_promoter_name;
+    }
+
+    public void setSold_by_promoter_name(String sold_by_promoter_name) {
+        this.sold_by_promoter_name = sold_by_promoter_name;
     }
 
     public String getService_tag() {
@@ -189,12 +207,12 @@ public class ObjectModel{
         this.bundle_code = bundle_code;
     }
 
-    public String getSold_by_promoter_name() {
-        return sold_by_promoter_name;
+    public String getSold_by_promoter_id() {
+        return sold_by_promoter_id;
     }
 
-    public void setSold_by_promoter_name(String sold_by_promoter_name) {
-        this.sold_by_promoter_name = sold_by_promoter_name;
+    public void setSold_by_promoter_id(String sold_by_promoter_id) {
+        this.sold_by_promoter_id = sold_by_promoter_id;
     }
     //TODO : Modify this product object according to the data required.
 }

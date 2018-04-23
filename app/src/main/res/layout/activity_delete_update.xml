@@ -13,7 +13,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/generatereportbuttondesign"
     android:orientation="vertical"
-    tools:context="com.example.vijaygarg.delagain.DeleteUpdate"
+    tools:context="com.example.vijaygarg.delagain.Activities.DeleteUpdate"
     android:padding="10dp">
 <android.support.v7.widget.RecyclerView
     android:layout_width="match_parent"

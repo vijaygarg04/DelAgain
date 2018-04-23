@@ -1,8 +1,7 @@
-package com.example.vijaygarg.delagain;
+package com.example.vijaygarg.delagain.Activities;
 
 import android.content.Context;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.os.Environment;
 
@@ -36,6 +35,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.widget.Toast;
 
+import com.example.vijaygarg.delagain.R;
 import com.roomorama.caldroid.CaldroidFragment;
 import com.roomorama.caldroid.CaldroidListener;
 
@@ -321,7 +321,7 @@ public class GenerateReport extends AppCompatActivity implements View.OnClickLis
                      break;
                  case 2:
 
-                     c.setCellValue(data.get(keys.get(i - 1)).getSold_by_promoter_name());
+                     c.setCellValue(data.get(keys.get(i - 1)).getSold_by_promoter_id());
                      break;
                  case 3:
 

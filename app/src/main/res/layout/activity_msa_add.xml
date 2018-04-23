@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<LinearLayout
-    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.vijaygarg.delagain.AddRemoveModel">
+    tools:context="com.example.vijaygarg.delagain.Activities.MsaAdd">
+
     <android.support.v7.widget.RecyclerView
         android:layout_marginTop="10dp"
-        android:id="@+id/addremoverecyclerview"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:id="@+id/rvmsa">
 
     </android.support.v7.widget.RecyclerView>
     <EditText
@@ -22,7 +19,7 @@
         android:layout_marginTop="10dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Model Name"
+        android:hint="Store Name"
         android:id="@+id/addremoveetstorename"
         android:gravity="center"
         android:layout_gravity="center"/>
@@ -31,10 +28,5 @@
         android:id="@+id/btnaddremovebtnmodel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="ADD Model"/>
-
-
-
+        android:text="ADD Store"/>
 </LinearLayout>
-</ScrollView>
-    

@@ -1,4 +1,4 @@
-package com.example.vijaygarg.delagain;
+package com.example.vijaygarg.delagain.Activities;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +10,7 @@ import android.widget.Button;
 
 import com.example.vijaygarg.delagain.Adapters.SchemeAdapter;
 import com.example.vijaygarg.delagain.Model.SchemeModel;
+import com.example.vijaygarg.delagain.R;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;

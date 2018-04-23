@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.vijaygarg.delagain.R;
-import com.example.vijaygarg.delagain.Welcome;
+import com.example.vijaygarg.delagain.Activities.Welcome;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
