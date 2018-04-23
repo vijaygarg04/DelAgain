@@ -42,10 +42,10 @@ public class PromoterAdapter extends RecyclerView.Adapter<PromoterAdapter.MyView
     public void onBindViewHolder(MyViewHolder holder, final int position) {
         ArrayList<String>arr=new ArrayList<>(arr1.keySet());
 
-        holder.name.setText(arr1.get(arr.get(position)).getName());
+        holder.name.setText(arr1.get(arr.get(position)).getPromoter_name());
         holder.id.setText(arr1.get(arr.get(position)).getPromoter_id());
-        holder.store.setText(arr1.get(arr.get(position)).getStore_id());
-        holder.contact.setText(arr1.get(arr.get(position)).getContact());
+        holder.store.setText(arr1.get(arr.get(position)).getStore_id()+"[ "+arr1.get(arr.get(position)).getStore_name()+" ]");
+        holder.contact.setText(arr1.get(arr.get(position)).getPromoter_contact());
         holder.date.setText(arr1.get(arr.get(position)).getDate_of_joining());
 
 

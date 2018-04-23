@@ -7,15 +7,15 @@ package com.example.vijaygarg.delagain.Model;
 public class PromoterModel {
     String promoter_name ="default";
     String promoter_id="default";
-    String contact="default";
+    String promoter_contact="default";
     String date_of_joining="default";
     String store_id="default";
     String password="default";
     String store_name="default";
-    public PromoterModel(String name, String id, String contact, String date_of_joining, String store_id) {
-        this.promoter_name = name;
-        this.promoter_id = id;
-        this.contact = contact;
+    public PromoterModel(String promoter_name, String promoter_id, String promoter_contact, String date_of_joining, String store_id) {
+        this.promoter_name = promoter_name;
+        this.promoter_id = promoter_id;
+        this.promoter_contact = promoter_contact;
         this.date_of_joining = date_of_joining;
         this.store_id = store_id;
     }
@@ -47,21 +47,21 @@ public class PromoterModel {
         this.password = password;
     }
 
-    public String getName() {
+
+    public String getPromoter_name() {
         return promoter_name;
     }
 
-    public void setName(String name) {
-        this.promoter_name = name;
+    public void setPromoter_name(String promoter_name) {
+        this.promoter_name = promoter_name;
     }
 
-
-    public String getContact() {
-        return contact;
+    public String getPromoter_contact() {
+        return promoter_contact;
     }
 
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setPromoter_contact(String promoter_contact) {
+        this.promoter_contact = promoter_contact;
     }
 
     public String getDate_of_joining() {

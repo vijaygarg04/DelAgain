@@ -86,12 +86,13 @@ public class DeleteUpdate extends AppCompatActivity {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()) {
                             String iod = idold.getText().toString();
+                            final String storenamenew[]=new String[1];
                             if (dataSnapshot1.getKey().equals(iod)) {
                                 PromoterModel promoterModel = dataSnapshot1.getValue(PromoterModel.class);
-                                sname[0] = promoterModel.getName();
+                                sname[0] = promoterModel.getPromoter_name();
                                 sstore[0] = promoterModel.getStore_id();
                                 sdate[0] = promoterModel.getDate_of_joining();
-                                scontact[0] = promoterModel.getContact();
+                                scontact[0] = promoterModel.getPromoter_contact();
                                 databaseReference.child(idold.getText().toString()).setValue(null);
 
                                 if (name.getText().toString().length() > 0) {
@@ -100,6 +101,19 @@ public class DeleteUpdate extends AppCompatActivity {
 
                                 if (store.getText().toString().length() > 0) {
                                     sstore[0] = store.getText().toString();
+                                    DatabaseReference databaseReference=FirebaseDatabase.getInstance().
+                                            getReference().child("storeinfo").child(sstore[0]);
+                                    databaseReference.addValueEventListener(new ValueEventListener() {
+                                        @Override
+                                        public void onDataChange(DataSnapshot dataSnapshot) {
+                                            storenamenew[0]=dataSnapshot.child("store_name").getValue(String.class);
+                                        }
+
+                                        @Override
+                                        public void onCancelled(DatabaseError databaseError) {
+
+                                        }
+                                    });
 
                                 }
                                 if (date.getText().toString().length() > 0) {
@@ -111,7 +125,11 @@ public class DeleteUpdate extends AppCompatActivity {
 
                                 }
                                 PromoterModel newdetail = new PromoterModel(sname[0], iod, scontact[0], sdate[0], sstore[0]);
+                                if(storenamenew[0].length()>0){
+                                    newdetail.setStore_name(storenamenew[0]);
+                                }
                                 databaseReference.child(iod).setValue(newdetail);
+                                databaseReference.removeEventListener(this);
                             }
                         }
                     }

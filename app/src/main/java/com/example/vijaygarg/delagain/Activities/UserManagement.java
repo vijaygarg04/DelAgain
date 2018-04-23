@@ -8,9 +8,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.vijaygarg.delagain.Model.PromoterModel;
+import com.example.vijaygarg.delagain.Model.StoreModel;
 import com.example.vijaygarg.delagain.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class UserManagement extends AppCompatActivity {
 
@@ -33,9 +37,27 @@ DatabaseReference databaseReference;
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DatabaseReference myb=databaseReference.child(id.getText().toString());
-                PromoterModel promoterModel=new PromoterModel(name.getText().toString(),id.getText().toString(),contact.getText().toString(),date.getText().toString(),store.getText().toString());
-                myb.setValue(promoterModel);
+                final DatabaseReference myb=databaseReference.child(id.getText().toString());
+                final PromoterModel promoterModel=new PromoterModel(name.getText().toString(),id.getText().toString(),contact.getText().toString(),date.getText().toString(),store.getText().toString());
+                final DatabaseReference mydb2=FirebaseDatabase.getInstance().getReference().child("storeinfo").child(store.getText().toString());
+
+                mydb2.addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        StoreModel storeModel=dataSnapshot.getValue(StoreModel.class);
+                        if(storeModel!=null&&storeModel.getStore_name().length()>0){
+                            promoterModel.setStore_name(storeModel.getStore_name());
+                            myb.setValue(promoterModel);
+                            mydb2.removeEventListener(this);
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+
+                    }
+                });
+
             }
         });
         update.setOnClickListener(new View.OnClickListener() {
