@@ -9,6 +9,9 @@ public class StoreModel {
     String store_id;
     Boolean is_store_active=true;
 
+    public StoreModel() {
+    }
+
     public StoreModel(String store_name, String store_id) {
         this.store_name = store_name;
         this.store_id = store_id;

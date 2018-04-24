@@ -44,9 +44,11 @@ public class PromoterAdapter extends RecyclerView.Adapter<PromoterAdapter.MyView
 
         holder.name.setText(arr1.get(arr.get(position)).getPromoter_name());
         holder.id.setText(arr1.get(arr.get(position)).getPromoter_id());
-        holder.store.setText(arr1.get(arr.get(position)).getStore_id()+"[ "+arr1.get(arr.get(position)).getStore_name()+" ]");
+        holder.store.setText(arr1.get(arr.get(position)).getStore_id()+" [ "+arr1.get(arr.get(position)).getStore_name()+" ]");
         holder.contact.setText(arr1.get(arr.get(position)).getPromoter_contact());
-        holder.date.setText(arr1.get(arr.get(position)).getDate_of_joining());
+        String dateofjoin=arr1.get(arr.get(position)).getDate_of_joining();
+        String formatdate=dateofjoin.substring(0,2)+"-"+dateofjoin.substring(2,4)+"-"+dateofjoin.substring(4);
+        holder.date.setText(formatdate);
 
 
     }

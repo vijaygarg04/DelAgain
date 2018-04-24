@@ -113,7 +113,6 @@ public class CompetitiveReportingData extends AppCompatActivity {
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                     if(dates.containsKey(dataSnapshot1.getKey())) {
                         for (DataSnapshot dataSnapshot2 : dataSnapshot1.getChildren()) {
-
                             arr.add(dataSnapshot2.getValue(CompetitiveModel.class));}
 
                     }
@@ -185,14 +184,9 @@ public class CompetitiveReportingData extends AppCompatActivity {
 
         boolean success = false;
 
-        Workbook wb = new HSSFWorkbook();
-
-        Cell c = null;
-
-
-
-        Sheet sheet1 = null;
-        sheet1 = wb.createSheet("Comp_Reporting");
+        final Workbook wb = new HSSFWorkbook();
+        Cell c=null;
+        final Sheet sheet1 =wb.createSheet("Comp_Reporting");
 
         sheet1.setColumnWidth(0, (15 * 500));
         sheet1.setColumnWidth(1, (15 * 500));
@@ -201,52 +195,111 @@ public class CompetitiveReportingData extends AppCompatActivity {
         sheet1.setColumnWidth(4, (15 * 300));
         sheet1.setColumnWidth(5, (15 * 300));
         sheet1.setColumnWidth(6, (15 * 300));
+        sheet1.setColumnWidth(7, (15 * 300));
+        sheet1.setColumnWidth(8, (15 * 300));
+
+        sheet1.setColumnWidth(9, (15 * 300));
 
         Row row1 = sheet1.createRow(0);
         c = row1.createCell(0);
         c.setCellValue("S.No");
         c = row1.createCell(1);
-        c.setCellValue("Store Name");
+        c.setCellValue("Store Id");
         c = row1.createCell(2);
-        c.setCellValue("DELL");
+        c.setCellValue("Store Name");
         c = row1.createCell(3);
-        c.setCellValue("HP");
+        c.setCellValue("Promoter Id");
         c = row1.createCell(4);
-        c.setCellValue("LENOVO");
+        c.setCellValue("Promoter Name");
+
         c = row1.createCell(5);
-        c.setCellValue("ACER");
+        c.setCellValue("DELL");
         c = row1.createCell(6);
+        c.setCellValue("HP");
+        c = row1.createCell(7);
+        c.setCellValue("LENOVO");
+        c = row1.createCell(8);
+        c.setCellValue("ACER");
+        c = row1.createCell(9);
         c.setCellValue("Other");
 
         for(int i=1;i<=arr.size();i++) {
 
-            Row row = sheet1.createRow(i);
-            for(int j=0;j<7;j++) {
+            final Row row = sheet1.createRow(i);
+            for(int j=0;j<=9;j++) {
                 c = row.createCell(j);
                 switch (j) {
                     case 0:
                         c.setCellValue(i + "");
                         break;
                     case 1:
-                        c.setCellValue(arr.get(i-1).getStorename());
+                        c.setCellValue(arr.get(i-1).getStore_id());
                         break;
                     case 2:
+                        //storename
+                        DatabaseReference db1=FirebaseDatabase.getInstance().getReference().child("storeinfo").child(arr.get(i-1).getStore_id());
+                        final int jj=j;
+                        db1.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        c.setCellValue(arr.get(i-1).getDell());
-                        break;
+                                Cell cell=row.createCell(jj);
+                                String val1=dataSnapshot.child("store_name").getValue(String.class);
+                                cell.setCellValue(val1);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        for(int k=0;k<1000;k++){
+                            Log.e("error","error");
+                        }
+                        break ;
                     case 3:
 
-                        c.setCellValue(arr.get(i-1).getHp());
+                        c.setCellValue(arr.get(i-1).getPromoter_id());
                         break;
                     case 4:
+                        //promoter name
+                        DatabaseReference db2=FirebaseDatabase.getInstance().getReference().child("promoterinfo").child(arr.get(i-1).getPromoter_id());
+                        final int jj2=j;
+                        db2.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                        c.setCellValue(arr.get(i-1).getLenovo());
+                                Cell cell=row.createCell(jj2);
+                                String val=dataSnapshot.child("promoter_name").getValue(String.class);
+                                cell.setCellValue(val);
+                            }
+
+                            @Override
+                            public void onCancelled(DatabaseError databaseError) {
+
+                            }
+                        });
+                        for(int l=0;l<1000;l++){
+                                Log.e("error","error");
+                        }
                         break;
                     case 5:
 
-                        c.setCellValue(arr.get(i-1).getAcer());
+                        c.setCellValue(arr.get(i-1).getDell());
                         break;
                     case 6:
+
+                        c.setCellValue(arr.get(i-1).getHp());
+                        break;
+                    case 7:
+
+                        c.setCellValue(arr.get(i-1).getLenovo());
+                        break;
+                    case 8:
+
+                        c.setCellValue(arr.get(i-1).getAcer());
+                        break;
+                    case 9:
 
                         c.setCellValue(arr.get(i-1).getOther());
                         break;

@@ -44,12 +44,11 @@ DatabaseReference databaseReference;
                 mydb2.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-                        StoreModel storeModel=dataSnapshot.getValue(StoreModel.class);
-                        if(storeModel!=null&&storeModel.getStore_name().length()>0){
-                            promoterModel.setStore_name(storeModel.getStore_name());
+
+
+                            promoterModel.setStore_name(dataSnapshot.child("store_name").getValue(String.class));
                             myb.setValue(promoterModel);
-                            mydb2.removeEventListener(this);
-                        }
+
                     }
 
                     @Override

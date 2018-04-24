@@ -12,6 +12,25 @@ public class PromoterModel {
     String store_id="default";
     String password="default";
     String store_name="default";
+    boolean is_active=true;
+    boolean logged_in =false;
+
+    public boolean isIs_active() {
+        return is_active;
+    }
+
+    public void setIs_active(boolean is_active) {
+        this.is_active = is_active;
+    }
+
+    public boolean isLogged_in() {
+        return logged_in;
+    }
+
+    public void setLogged_in(boolean logged_in) {
+        this.logged_in = logged_in;
+    }
+
     public PromoterModel(String promoter_name, String promoter_id, String promoter_contact, String date_of_joining, String store_id) {
         this.promoter_name = promoter_name;
         this.promoter_id = promoter_id;

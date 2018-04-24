@@ -60,29 +60,11 @@ public class StoreAdapter extends RecyclerView.Adapter<StoreAdapter.MyViewholder
             public void onClick(View view) {
                 final DatabaseReference mydb=db.child("storeinfo").child(array.get(position).getStore_id());
                 final Boolean active[]=new Boolean[1];
-                mydb.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        active[0]=dataSnapshot.child("is_store_active").getValue(Boolean.class);
-                        mydb.removeEventListener(this);
+               mydb.child("is_store_active").setValue(false);
+               array.remove(position);
+               notifyDataSetChanged();
 
-                    }
 
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-
-                });
-                mydb.child("is_store_active").setValue(!active[0]);
-                if(!active[0]){
-                    holder.storeactive.setText("Press To Deactivate Store");
-                    holder.storeactive.setBackgroundColor(Color.RED);
-                }else{
-                    holder.storeactive.setText("Press To activate Store");
-                    holder.storeactive.setBackgroundColor(Color.GREEN);
-
-                }
             }
         });
 

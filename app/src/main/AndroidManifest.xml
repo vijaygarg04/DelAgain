@@ -37,6 +37,9 @@
         <activity android:name=".Activities.MsaAdd" />
         <activity android:name=".Activities.ChatActivity" />
         <activity android:name=".Activities.StoreList"></activity>
+        <activity android:name=".Activities.StoreAdd"></activity>
     </application>
+
+
 
 </manifest>

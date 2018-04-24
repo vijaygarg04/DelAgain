@@ -5,27 +5,36 @@ package com.example.vijaygarg.delagain.Model;
  */
 
 public class CompetitiveModel {
-    String hp,lenovo,acer,other,dell,storename;
+    String hp,lenovo,acer,other,dell,promoter_id,store_id;
 
     public CompetitiveModel() {
     }
 
-    public CompetitiveModel(String hp, String lenovo, String acer, String other,String dell,String storename) {
+    public CompetitiveModel(String hp, String lenovo, String acer, String other,String dell,String promoterid,String store_id) {
         this.hp = hp;
         this.lenovo = lenovo;
         this.acer = acer;
         this.dell=dell;
         this.other = other;
-        this.storename=storename;
+        this.promoter_id=promoterid;
+        this.store_id=store_id;
 
     }
 
-    public String getStorename() {
-        return storename;
+    public String getStore_id() {
+        return store_id;
     }
 
-    public void setStorename(String storename) {
-        this.storename = storename;
+    public void setStore_id(String store_id) {
+        this.store_id = store_id;
+    }
+
+    public String getPromoter_id() {
+        return promoter_id;
+    }
+
+    public void setPromoter_id(String promoter_id) {
+        this.promoter_id = promoter_id;
     }
 
     public String getHp() {

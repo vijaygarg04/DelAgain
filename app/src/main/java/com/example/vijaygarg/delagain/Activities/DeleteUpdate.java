@@ -68,7 +68,10 @@ public class DeleteUpdate extends AppCompatActivity {
         remove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                databaseReference.child(idold.getText().toString()).setValue(null);
+                DatabaseReference dbb=databaseReference.child(idold.getText().toString()).child("is_active");
+                dbb.setValue(false);
+                data.remove(idold.getText().toString());
+                promoterAdapter.notifyDataSetChanged();
 
             }
         });
@@ -147,6 +150,7 @@ public class DeleteUpdate extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                    if(dataSnapshot1.child("is_active").getValue(Boolean.class))
                     data.put(dataSnapshot1.getValue(PromoterModel.class).getPromoter_id(),dataSnapshot1.getValue(PromoterModel.class));
                 }
                 promoterAdapter.notifyDataSetChanged();

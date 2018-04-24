@@ -43,7 +43,7 @@ public class CompetitionReportAdapter extends RecyclerView.Adapter<CompetitionRe
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
 
-        holder.store.setText(arr.get(position).getStorename());
+        holder.store.setText(arr.get(position).getStore_id());
         holder.dell.setText(arr.get(position).getDell());
         holder.lenovo.setText(arr.get(position).getLenovo());
         holder.other.setText(arr.get(position).getOther());
