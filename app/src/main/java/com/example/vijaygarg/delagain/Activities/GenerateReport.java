@@ -284,72 +284,86 @@ public class GenerateReport extends AppCompatActivity implements View.OnClickLis
         sheet1.setColumnWidth(7, (15 * 500));
         sheet1.setColumnWidth(8, (15 * 500));
         sheet1.setColumnWidth(9, (15 * 500));
+        sheet1.setColumnWidth(10, (15 * 500));
+        sheet1.setColumnWidth(11, (15 * 500));
 
         Row row1 = sheet1.createRow(0);
         c = row1.createCell(0);
         c.setCellValue("S.No");
         c = row1.createCell(1);
-        c.setCellValue("Store Name");
+        c.setCellValue("Store ID");
         c = row1.createCell(2);
-        c.setCellValue("Promoter Name");
+        c.setCellValue("Store Name");
         c = row1.createCell(3);
-        c.setCellValue("Model Number");
+        c.setCellValue("Promoter ID");
         c = row1.createCell(4);
-        c.setCellValue("Service Tag");
+        c.setCellValue("Promoter Name");
         c = row1.createCell(5);
-        c.setCellValue("Bundle Code");
+        c.setCellValue("Model Number");
         c = row1.createCell(6);
-        c.setCellValue("MSA Name");
+        c.setCellValue("Service Tag");
         c = row1.createCell(7);
-        c.setCellValue("MSA DATE");
+        c.setCellValue("Bundle Code");
         c = row1.createCell(8);
-        c.setCellValue("Sell In DATE");
+        c.setCellValue("MSA Name");
         c = row1.createCell(9);
+        c.setCellValue("MSA DATE");
+        c = row1.createCell(10);
+        c.setCellValue("Sell In DATE");
+        c = row1.createCell(11);
         c.setCellValue("Sell Out DATE");
 
         for(int i=1;i<=keys.size();i++) {
 
             Row row = sheet1.createRow(i);
-            for(int j=0;j<10;j++) {
+            for(int j=0;j<=11;j++) {
              c = row.createCell(j);
              switch (j) {
                  case 0:
                      c.setCellValue(i + "");
                      break;
                  case 1:
-                     c.setCellValue(data.get(keys.get(i - 1)).getStore_name());
+                     c.setCellValue(data.get(keys.get(i - 1)).getStore_id());
                      break;
                  case 2:
-
-                     c.setCellValue(data.get(keys.get(i - 1)).getSold_by_promoter_id());
+                     c.setCellValue(data.get(keys.get(i - 1)).getStore_name());
                      break;
                  case 3:
 
-                     c.setCellValue(data.get(keys.get(i - 1)).getModel_number());
+                     c.setCellValue(data.get(keys.get(i - 1)).getSold_by_promoter_id());
                      break;
+
                  case 4:
 
-                     c.setCellValue(data.get(keys.get(i - 1)).getService_tag());
+                     c.setCellValue(data.get(keys.get(i - 1)).getSold_by_promoter_name());
                      break;
                  case 5:
 
-                     c.setCellValue(data.get(keys.get(i - 1)).getBundle_code());
+                     c.setCellValue(data.get(keys.get(i - 1)).getModel_number());
                      break;
                  case 6:
 
-                     c.setCellValue(data.get(keys.get(i - 1)).getMsa_name());
+                     c.setCellValue(data.get(keys.get(i - 1)).getService_tag());
                      break;
                  case 7:
+
+                     c.setCellValue(data.get(keys.get(i - 1)).getBundle_code());
+                     break;
+                 case 8:
+
+                     c.setCellValue(data.get(keys.get(i - 1)).getMsa_name());
+                     break;
+                 case 9:
                      String sdate=data.get(keys.get(i - 1)).getMsa_date();
                      sdate=dateformat(sdate);
                      c.setCellValue(sdate);
                      break;
-                 case 8:
+                 case 10:
                      String ssdate=data.get(keys.get(i - 1)).getStore_sell_in_date();
                      ssdate=dateformat(ssdate);
                      c.setCellValue(ssdate);
                      break;
-                 case 9:
+                 case 11:
                      String sssdate=data.get(keys.get(i - 1)).getStore_sell_out_date();
                      sssdate=dateformat(sssdate);
 

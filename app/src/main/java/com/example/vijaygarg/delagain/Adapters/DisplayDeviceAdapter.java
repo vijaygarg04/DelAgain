@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.vijaygarg.delagain.Model.DisplayModel;
 import com.example.vijaygarg.delagain.Model.ObjectModel;
 import com.example.vijaygarg.delagain.R;
 
@@ -20,10 +21,10 @@ import java.util.ArrayList;
 
 public class DisplayDeviceAdapter extends RecyclerView.Adapter<DisplayDeviceAdapter.MyViewHolder> {
     Context context;
-    ArrayList<ObjectModel> arr;
+    ArrayList<DisplayModel> arr;
 
 
-    public DisplayDeviceAdapter(Context context, ArrayList<ObjectModel> arr) {
+    public DisplayDeviceAdapter(Context context, ArrayList<DisplayModel> arr) {
         this.context = context;
         this.arr = arr;
 
@@ -43,6 +44,7 @@ public class DisplayDeviceAdapter extends RecyclerView.Adapter<DisplayDeviceAdap
         holder.servicetag.setText(arr.get(position).getService_tag());
         holder.modelnumber.setText(arr.get(position).getModel_number());
         holder.storename.setText(arr.get(position).getStore_name());
+        holder.storeid.setText(arr.get(position).getStore_id());
 
 
     }
@@ -53,14 +55,16 @@ public class DisplayDeviceAdapter extends RecyclerView.Adapter<DisplayDeviceAdap
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView servicetag,modelnumber,storename;
+        TextView servicetag,modelnumber,storename,storeid;
         Button accept,reject;
         public MyViewHolder(View itemView) {
             super(itemView);
             servicetag=itemView.findViewById(R.id.servicetag);
             modelnumber=itemView.findViewById(R.id.modelnumber);
             storename=itemView.findViewById(R.id.storename);
+            storeid=itemView.findViewById(R.id.storeid);
             accept=itemView.findViewById(R.id.accept);
+
             reject=itemView.findViewById(R.id.reject);
             accept.setVisibility(View.GONE);
             reject.setVisibility(View.GONE);

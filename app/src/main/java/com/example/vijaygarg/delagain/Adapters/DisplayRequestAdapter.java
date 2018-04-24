@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.vijaygarg.delagain.Model.DisplayModel;
 import com.example.vijaygarg.delagain.Model.ObjectModel;
 import com.example.vijaygarg.delagain.Model.PromoterModel;
 import com.example.vijaygarg.delagain.R;
@@ -23,10 +24,10 @@ import java.util.ArrayList;
 
 public class DisplayRequestAdapter extends RecyclerView.Adapter<DisplayRequestAdapter.MyViewHolder> {
     Context context;
-    ArrayList<ObjectModel> arr;
+    ArrayList<DisplayModel> arr;
 
 
-    public DisplayRequestAdapter(Context context, ArrayList<ObjectModel> arr) {
+    public DisplayRequestAdapter(Context context, ArrayList<DisplayModel> arr) {
         this.context = context;
         this.arr = arr;
 
@@ -46,16 +47,25 @@ public class DisplayRequestAdapter extends RecyclerView.Adapter<DisplayRequestAd
         holder.servicetag.setText(arr.get(position).getService_tag());
         holder.modelnumber.setText(arr.get(position).getModel_number());
         holder.storename.setText(arr.get(position).getStore_name());
-       holder.accept.setOnClickListener(new View.OnClickListener() {
+        holder.storeid.setText(arr.get(position).getStore_id());
+        holder.accept.setOnClickListener(new View.OnClickListener() {
            @Override
            public void onClick(View view) {
-               //TODO update database
+               DatabaseReference db=FirebaseDatabase.getInstance().getReference().child("display_request").child(arr.get(position).getService_tag());
+               db.child("request_result").setValue("accept");
+               arr.remove(position);
+               notifyDataSetChanged();
+
            }
        });
         holder.reject.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //TODO update database
+                DatabaseReference db=FirebaseDatabase.getInstance().getReference().child("display_request").child(arr.get(position).getService_tag());
+                db.child("request_result").setValue("reject");
+                arr.remove(position);
+                notifyDataSetChanged();
             }
         });
 
@@ -67,7 +77,7 @@ public class DisplayRequestAdapter extends RecyclerView.Adapter<DisplayRequestAd
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
-        TextView servicetag,modelnumber,storename;
+        TextView servicetag,modelnumber,storename,storeid;
         Button accept,reject;
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -76,6 +86,7 @@ public class DisplayRequestAdapter extends RecyclerView.Adapter<DisplayRequestAd
             storename=itemView.findViewById(R.id.storename);
             accept=itemView.findViewById(R.id.accept);
             reject=itemView.findViewById(R.id.reject);
+            storeid=itemView.findViewById(R.id.storeid);
 
 
 

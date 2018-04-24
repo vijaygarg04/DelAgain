@@ -237,51 +237,16 @@ public class CompetitiveReportingData extends AppCompatActivity {
                         break;
                     case 2:
                         //storename
-                        DatabaseReference db1=FirebaseDatabase.getInstance().getReference().child("storeinfo").child(arr.get(i-1).getStore_id());
-                        final int jj=j;
-                        db1.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
-
-                                Cell cell=row.createCell(jj);
-                                String val1=dataSnapshot.child("store_name").getValue(String.class);
-                                cell.setCellValue(val1);
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-                        for(int k=0;k<1000;k++){
-                            Log.e("error","error");
-                        }
-                        break ;
+                       c.setCellValue(arr.get(i-1).getStore_name());
+                        break;
                     case 3:
 
                         c.setCellValue(arr.get(i-1).getPromoter_id());
                         break;
                     case 4:
                         //promoter name
-                        DatabaseReference db2=FirebaseDatabase.getInstance().getReference().child("promoterinfo").child(arr.get(i-1).getPromoter_id());
-                        final int jj2=j;
-                        db2.addValueEventListener(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(DataSnapshot dataSnapshot) {
 
-                                Cell cell=row.createCell(jj2);
-                                String val=dataSnapshot.child("promoter_name").getValue(String.class);
-                                cell.setCellValue(val);
-                            }
-
-                            @Override
-                            public void onCancelled(DatabaseError databaseError) {
-
-                            }
-                        });
-                        for(int l=0;l<1000;l++){
-                                Log.e("error","error");
-                        }
+                        c.setCellValue(arr.get(i-1).getPromoter_name());
                         break;
                     case 5:
 
