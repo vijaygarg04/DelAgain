@@ -87,7 +87,7 @@ upload.setOnClickListener(new View.OnClickListener() {
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 downloaduri=taskSnapshot.getDownloadUrl();
                  Date da=new Date();
-                SimpleDateFormat sdf=new SimpleDateFormat("ddMMyyyy");
+                SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
                 String sdate=sdf.format(da).toString().trim();
                 DatabaseReference mydr=databaseReference.child("schemes").child(sdate);
                 SchemeModel schemeModel=new SchemeModel(downloaduri.toString(),sdesc,sdate,stitle,true);

@@ -95,7 +95,7 @@ public class CompetitiveReportingData extends AppCompatActivity {
 
         Calendar endCalendar = new GregorianCalendar();
         endCalendar.setTime(endDate);
-        final SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyy");
+        final SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 
         while (calendar.before(endCalendar)) {
             Date result = calendar.getTime();

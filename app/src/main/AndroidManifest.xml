@@ -22,7 +22,6 @@
         </activity>
         <activity android:name=".Activities.Welcome" />
         <activity android:name=".userdata.SignUpActivity" />
-        <activity android:name=".AddRemoveModel" />
         <activity android:name=".Activities.DataEntry" />
         <activity android:name=".Activities.GenerateReport" />
         <activity android:name=".Activities.UserManagement" />
@@ -34,10 +33,7 @@
         <activity android:name=".Activities.RemoveModel" />
         <activity android:name=".Activities.CompetitiveReporting" />
         <activity android:name=".Activities.CompetitiveReportingData" />
-        <activity android:name=".Activities.MsaAdd" />
         <activity android:name=".Activities.ChatActivity" />
-        <activity android:name=".Activities.StoreList"></activity>
-        <activity android:name=".Activities.StoreAdd"></activity>
     </application>
 
 

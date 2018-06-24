@@ -46,12 +46,7 @@ private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=1001;
         display=findViewById(R.id.display);
         comp=findViewById(R.id.comp);
         storeadd=findViewById(R.id.store_add);
-        storeadd.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Welcome.this,StoreAdd.class));
-            }
-        });
+
         comp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -64,12 +59,7 @@ private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=1001;
                 startActivity(new Intent(Welcome.this,UserManagement.class));
             }
         });
-        model.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Welcome.this,AddRemoveModel.class));
-            }
-        });
+
         generatereport=findViewById(R.id.generatereport);
         generatereport.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -50,75 +50,25 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 public class DataEntry extends AppCompatActivity {
-EditText serialtag,msaname,modelnumber,bundlecode,filename;
-Button addtolist,submitlist,filesubmit;
+EditText filename;
+Button filesubmit;
 DatabaseReference databaseReference;
 HashMap<String,Boolean>alreadyavailable;
-RecyclerView rv;
 ArrayList<ObjectModel>arr;
-
-
     DataEntryAdapter dataEntryAdapter;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.activity_data_entry);
-
-        serialtag=findViewById(R.id.serialtag);
-        msaname=findViewById(R.id.msaname);
-        modelnumber=findViewById(R.id.modelnumber);
-        bundlecode=findViewById(R.id.bundlecode);
         filename=findViewById(R.id.filename);
-        addtolist=findViewById(R.id.addtolist);
-        submitlist=findViewById(R.id.submitlist);
         filesubmit=findViewById(R.id.submitfile);
-
         arr=new ArrayList<>();
         alreadyavailable=new HashMap<>();
-        rv=findViewById(R.id.rv);
-        rv.setLayoutManager(new LinearLayoutManager(this));
-        dataEntryAdapter=new DataEntryAdapter(this,arr);
-        rv.setAdapter(dataEntryAdapter);
-
         databaseReference=FirebaseDatabase.getInstance().getReference().child("msa");
-
-
-
-
-        addtolist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String sserailtag=serialtag.getText().toString();
-                String smsaname=msaname.getText().toString();
-                String smodelnumber=modelnumber.getText().toString();
-                String sbundlecode=bundlecode.getText().toString();
-                Date da=new Date();
-                SimpleDateFormat sdf=new SimpleDateFormat("ddMMyyyy");
-                String sdate=sdf.format(da).toString().trim();
-                ObjectModel objectModel=new ObjectModel(sserailtag,smsaname,true,sdate,smodelnumber,sbundlecode);
-                arr.add(objectModel);
-                serialtag.setText("");
-                msaname.setText("");
-                modelnumber.setText("");
-                bundlecode.setText("");
-                dataEntryAdapter.notifyDataSetChanged();
-
-
-            }
-        });
-        submitlist.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                MyTask myTask=new MyTask();
-                myTask.execute();
-            }
-        });
         filesubmit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String sfilename=filename.getText().toString();
+                String sfilename=filename.getText().toString()+".xls";
                 readExcelFile(DataEntry.this,sfilename);
             }
         });
@@ -128,9 +78,6 @@ ArrayList<ObjectModel>arr;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            Date date=new Date();
-            SimpleDateFormat simpleDateFormat=new SimpleDateFormat("ddMMyyyy");
-            String sdate=simpleDateFormat.format(date).toString().trim();
             databaseReference= FirebaseDatabase.getInstance().getReference().child("msa");
 
         }
@@ -219,7 +166,7 @@ ArrayList<ObjectModel>arr;
                     Toast.makeText(context, "cell Value: " + myCell.toString(), Toast.LENGTH_SHORT).show();
                 }
                 Date da=new Date();
-                SimpleDateFormat sdf=new SimpleDateFormat("ddMMyyyy");
+                SimpleDateFormat sdf=new SimpleDateFormat("yyyyMMdd");
                 String sdate=sdf.format(da).toString().trim();
                 ObjectModel objectModel=new ObjectModel(values[1],values[3],true,sdate,values[0],values[2]);
                 arr.add(objectModel);

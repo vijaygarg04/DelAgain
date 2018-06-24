@@ -66,7 +66,7 @@ public class GenerateReport extends AppCompatActivity implements View.OnClickLis
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
-        final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        final SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         caldroidFragment = new CaldroidFragment();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_generate_report);
@@ -109,16 +109,16 @@ public class GenerateReport extends AppCompatActivity implements View.OnClickLis
                         disabledates.add(formatter.format(result));
                         i--;
                     }
-                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
+                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd");
 
-                    caldroidFragment.setDisableDatesFromString(disabledates,"dd/MM/yyyy");
+                    caldroidFragment.setDisableDatesFromString(disabledates,"yyyy/MM/dd");
                     ((Button)findViewById(R.id.btncustom)).setText(simpleDateFormat.format(startDate).toString()+"   TO   - - / - -/ - - - -");
 
                 }else if(enddateset==false){
                     endDate=date;
                     datesBetween(startDate,endDate);
                     ColorDrawable red = new ColorDrawable(Color.CYAN);
-                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
+                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd");
 
 
                     colordatesbetween(startDate,endDate,red);
@@ -132,7 +132,7 @@ public class GenerateReport extends AppCompatActivity implements View.OnClickLis
                     ((Button)findViewById(R.id.btncustom)).setText("-- / --/ ----   TO   -- / --/ ----");
 
                     caldroidFragment.setBackgroundDrawableForDate(white,endDate);
-                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("ddMMyyyy");
+                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyMMdd");
                     colordatesbetween(startDate,endDate,white);
 
                     startDate=null;
@@ -223,7 +223,7 @@ public class GenerateReport extends AppCompatActivity implements View.OnClickLis
                     }
                 }
                 Date date=new Date();
-                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd_MM_yyyy");
+                SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy_MM_dd");
 
                 saveExcelFile(GenerateReport.this,simpleDateFormat.format(date)+"_report.xls");
             }
@@ -243,7 +243,7 @@ public class GenerateReport extends AppCompatActivity implements View.OnClickLis
 
         Calendar endCalendar = new GregorianCalendar();
         endCalendar.setTime(endDate);
-        final SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy");
+        final SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 
         while (calendar.before(endCalendar)) {
             Date result = calendar.getTime();

@@ -41,7 +41,7 @@ public class CompetitiveReporting extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_competitive_reporting);
-        final SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
+        final SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
         caldroidFragment = new CaldroidFragment();
         data=new HashMap<>();
         arr=new HashMap<>();
@@ -77,16 +77,16 @@ public class CompetitiveReporting extends AppCompatActivity implements View.OnCl
                         disabledates.add(formatter.format(result));
                         i--;
                     }
-                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
+                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd");
 
-                    caldroidFragment.setDisableDatesFromString(disabledates,"dd/MM/yyyy");
+                    caldroidFragment.setDisableDatesFromString(disabledates,"yyyy/MM/dd");
                     ((Button)findViewById(R.id.btncustom)).setText(simpleDateFormat.format(startDate).toString()+"   TO   - - / - -/ - - - -");
 
                 }else if(enddateset==false){
                     endDate=date;
                     datesBetween(startDate,endDate);
                     ColorDrawable red = new ColorDrawable(Color.CYAN);
-                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("dd/MM/yyyy");
+                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyy/MM/dd");
 
 
                     colordatesbetween(startDate,endDate,red);
@@ -100,7 +100,7 @@ public class CompetitiveReporting extends AppCompatActivity implements View.OnCl
                     ((Button)findViewById(R.id.btncustom)).setText("-- / --/ ----   TO   -- / --/ ----");
 
                     caldroidFragment.setBackgroundDrawableForDate(white,endDate);
-                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("ddMMyyyy");
+                    SimpleDateFormat simpleDateFormat=new SimpleDateFormat("yyyyMMdd");
                     colordatesbetween(startDate,endDate,white);
 
                     startDate=null;
@@ -165,7 +165,7 @@ public class CompetitiveReporting extends AppCompatActivity implements View.OnCl
 
         Calendar endCalendar = new GregorianCalendar();
         endCalendar.setTime(endDate);
-        final SimpleDateFormat formatter = new SimpleDateFormat("ddMMyyyy");
+        final SimpleDateFormat formatter = new SimpleDateFormat("yyyyMMdd");
 
         while (calendar.before(endCalendar)) {
             Date result = calendar.getTime();
