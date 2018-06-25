@@ -41,11 +41,9 @@ private final int MY_PERMISSIONS_REQUEST_READ_CONTACTS=1001;
             }
         });
         scheme=findViewById(R.id.btnscheme);
-        model=findViewById(R.id.welcomebtnmodel);
         usermanagement=findViewById(R.id.usermanagement);
         display=findViewById(R.id.display);
         comp=findViewById(R.id.comp);
-        storeadd=findViewById(R.id.store_add);
 
         comp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -115,6 +113,11 @@ return true;
 
                 } else {
 
+                    if (checkSelfPermission(android.Manifest.permission.READ_CONTACTS)
+                            != PackageManager.PERMISSION_GRANTED) {
+                        requestPermissions(new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
+                                MY_PERMISSIONS_REQUEST_READ_CONTACTS);
+                    }
                 }
                 return;
             }

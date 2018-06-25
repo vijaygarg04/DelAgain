@@ -96,6 +96,9 @@ upload.setOnClickListener(new View.OnClickListener() {
 
                 Toast.makeText(Scheme.this,"Successfully Uploaded",Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
+                Intent i =new Intent(Scheme.this,Welcome.class);
+                startActivity(i);
+                finish();
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override

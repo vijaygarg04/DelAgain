@@ -416,29 +416,8 @@ public class GenerateReport extends AppCompatActivity implements View.OnClickLis
         }
         return false;
     }
-    private void setCustomResourceForDates() {
-        Calendar cal = Calendar.getInstance();
-
-        // Min date is last 7 days
-        cal.add(Calendar.DATE, -700 );
-        Date blueDate = cal.getTime();
-
-        // Max date is next 7 days
-        cal = Calendar.getInstance();
-        cal.add(Calendar.DATE, 7);
-        Date greenDate = cal.getTime();
-
-        if (caldroidFragment != null) {
-            ColorDrawable blue = new ColorDrawable(getResources().getColor(R.color.caldroid_sky_blue));
-            ColorDrawable green = new ColorDrawable(Color.GREEN);
-            caldroidFragment.setBackgroundDrawableForDate(blue, blueDate);
-            caldroidFragment.setBackgroundDrawableForDate(green, greenDate);
-            caldroidFragment.setTextColorForDate(R.color.caldroid_white, blueDate);
-            caldroidFragment.setTextColorForDate(R.color.caldroid_white, greenDate);
-        }
-    }
     public String dateformat(String date){
-        return date.substring(0,2)+"/"+date.substring(2,4)+"/"+date.substring(4);
+        return date.substring(0,4)+"/"+date.substring(4,6)+"/"+date.substring(6);
     }
 }
 
