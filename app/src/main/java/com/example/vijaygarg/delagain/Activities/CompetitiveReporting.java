@@ -32,7 +32,6 @@ public class CompetitiveReporting extends AppCompatActivity implements View.OnCl
     HashMap<String,Boolean>arr;
     HashMap<String ,Boolean>servicetag;
     ArrayList<String> disabledates;
-    private boolean undo = false;
     private CaldroidFragment caldroidFragment;
     Date startDate,endDate;
     boolean startdateset=false;

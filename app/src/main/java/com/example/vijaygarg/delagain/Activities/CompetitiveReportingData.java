@@ -110,6 +110,7 @@ public class CompetitiveReportingData extends AppCompatActivity {
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
                 for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
                     if(dates.containsKey(dataSnapshot1.getKey())) {
                         for (DataSnapshot dataSnapshot2 : dataSnapshot1.getChildren()) {

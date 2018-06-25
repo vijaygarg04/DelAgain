@@ -28,6 +28,7 @@ public class DisplayRequestAdapter extends RecyclerView.Adapter<DisplayRequestAd
 
 
     public DisplayRequestAdapter(Context context, ArrayList<DisplayModel> arr) {
+
         this.context = context;
         this.arr = arr;
 
