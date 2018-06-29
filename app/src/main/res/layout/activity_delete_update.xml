@@ -33,7 +33,7 @@
         android:layout_marginTop="25dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Enter id to be updated"
+        android:hint="Enter ID"
         android:id="@+id/updateid"/>
     <EditText
         android:minHeight="50dp"

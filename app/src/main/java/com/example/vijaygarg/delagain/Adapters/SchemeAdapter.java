@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.example.vijaygarg.delagain.Model.ObjectModel;
 import com.example.vijaygarg.delagain.Model.SchemeModel;
 import com.example.vijaygarg.delagain.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -61,7 +62,7 @@ public class SchemeAdapter extends RecyclerView.Adapter<SchemeAdapter.MyViewHold
         });
     }
     public void removeitem(final SchemeAdapter.MyViewHolder holder, final int position ){
-        DatabaseReference mydr=firebaseDatabase.child("schemes");
+        final DatabaseReference mydr=firebaseDatabase.child("schemes");
         final String stitle=arr.get(position).getTitle();
         final String sdate=arr.get(position).getDate();
 
@@ -73,8 +74,12 @@ public class SchemeAdapter extends RecyclerView.Adapter<SchemeAdapter.MyViewHold
                         SchemeModel schemeModel=dataSnapshot2.getValue(SchemeModel.class);
 
                         if(schemeModel.getTitle().equals(stitle)&&schemeModel.getIs_active()&&sdate.equals(schemeModel.getDate())){
-                            dataSnapshot2.getRef().child("is_active").setValue(false);
-                            arr.remove(position);
+                            dataSnapshot2.getRef().child("is_active").setValue(false).addOnSuccessListener(new OnSuccessListener<Void>() {
+                                @Override
+                                public void onSuccess(Void aVoid) {
+                                    arr.remove(position);
+                                }
+                            });
 
                         }
                     }

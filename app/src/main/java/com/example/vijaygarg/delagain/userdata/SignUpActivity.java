@@ -75,13 +75,26 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     public void onClick(View view) {
         final String sname=name.getText().toString().trim();
         final String snumber=number.getText().toString().trim();
-        final String suname=uname.getText().toString().trim()+"@dell.com";
+        final String suname=uname.getText().toString().toLowerCase().trim()+"@dell.com";
         final String spass=password.getText().toString().trim();
+        if(sname.length()<=0){
+            name.setError("Enter Name");
+            return;
+        }else if(snumber.length()!=10){
+            number.setError("Enter contact number 10 digits");
+            return;
+        }else if(suname.length()<=9){
+            uname.setError("Enter USER-ID");
+            return;
+        }else if(spass.length()<=6){
+            password.setError("minimum password length 6");
+            return;
+        }
         mAuth.createUserWithEmailAndPassword(suname,spass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
                 if(task.isSuccessful()){
-
+                    Toast.makeText(SignUpActivity.this,"User Acccount Created Successfully",Toast.LENGTH_LONG).show();
                 }else{
 
                     Toast.makeText(SignUpActivity.this,"User Acccount Created Failed",Toast.LENGTH_LONG).show();

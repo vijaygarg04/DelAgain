@@ -38,17 +38,37 @@ DatabaseReference databaseReference;
             @Override
             public void onClick(View view) {
                 final DatabaseReference myb=databaseReference.child(id.getText().toString());
-                final PromoterModel promoterModel=new PromoterModel(name.getText().toString(),id.getText().toString(),contact.getText().toString(),date.getText().toString(),store.getText().toString());
-                final DatabaseReference mydb2=FirebaseDatabase.getInstance().getReference().child("storeinfo").child(store.getText().toString());
-
-                mydb2.addValueEventListener(new ValueEventListener() {
+                if(name.getText().toString().length()<=0 ){
+                    name.setError("Name Cannot Be Empty");
+                    return ;
+                }else if(id.getText().toString().length()<=0){
+                    id.setError("Id Cannot Be Empty");
+                    return;
+                }else if(contact.getText().toString().length()!=10){
+                    contact.setError("Contact Number must be of 10 digits");
+                    return;
+                }else if(date.getText().toString().length()<=0 ){
+                    date.setError("Date cannot be empty");
+                    return ;
+                }else if(store.getText().toString().length()<=0){
+                    store.setError("Store name Cannot be empty");
+                    return;
+                }
+                databaseReference.addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
-
-
-                            promoterModel.setStore_name(dataSnapshot.child("store_name").getValue(String.class));
-                            myb.setValue(promoterModel);
-
+                        boolean isAvailable=false;
+                        for(DataSnapshot dataSnapshot1:dataSnapshot.getChildren()){
+                            if(dataSnapshot1.getKey().toLowerCase().equals(id.getText().toString().toLowerCase())){
+                                isAvailable=true;
+                            }
+                        }
+                        if(isAvailable==false){
+                            final PromoterModel promoterModel=new PromoterModel(name.getText().toString(),id.getText().toString(),contact.getText().toString(),date.getText().toString(),store.getText().toString());
+                            final DatabaseReference mydb2=FirebaseDatabase.getInstance().getReference().child("promoterinfo").child(id.getText().toString());
+                            databaseReference.removeEventListener(this);
+                            mydb2.setValue(promoterModel);
+                        }
                     }
 
                     @Override
@@ -56,6 +76,7 @@ DatabaseReference databaseReference;
 
                     }
                 });
+
 
             }
         });

@@ -67,16 +67,16 @@ upload.setOnClickListener(new View.OnClickListener() {
 
         final String stitle=title.getText().toString();
         final String sdesc=discription.getText().toString();
-        if(stitle.length()==0){
+        if(stitle.length()<=0){
             title.setError("Enter Title here");
             return;
         }
-        if(sdesc.length()==0){
+        if(sdesc.length()<=0){
             discription.setError("Enter Discrpition Here");
             return;
         }
-        if(imageuri==null){
-            Toast.makeText(Scheme.this,"Upload Image",Toast.LENGTH_LONG).show();
+        if(imageuri==null || imageuri.toString().length()<=0){
+            Toast.makeText(Scheme.this,"Image Not Uploaded",Toast.LENGTH_LONG).show();
             return;
         }
 
@@ -91,19 +91,30 @@ upload.setOnClickListener(new View.OnClickListener() {
                 String sdate=sdf.format(da).toString().trim();
                 DatabaseReference mydr=databaseReference.child("schemes").child(sdate);
                 SchemeModel schemeModel=new SchemeModel(downloaduri.toString(),sdesc,sdate,stitle,true);
-                mydr.push().setValue(schemeModel);
+                mydr.push().setValue(schemeModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Toast.makeText(Scheme.this,"Successfully Uploaded",Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+                        Intent i =new Intent(Scheme.this,Welcome.class);
+                        startActivity(i);
+                        finish();
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Toast.makeText(Scheme.this,"Data Upload Failed",Toast.LENGTH_LONG).show();
+                        progressDialog.dismiss();
+                    }
+                });
 
 
-                Toast.makeText(Scheme.this,"Successfully Uploaded",Toast.LENGTH_LONG).show();
-                progressDialog.dismiss();
-                Intent i =new Intent(Scheme.this,Welcome.class);
-                startActivity(i);
-                finish();
+
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                Toast.makeText(Scheme.this,"Upload Failed Please Try Again",Toast.LENGTH_LONG).show();
+                Toast.makeText(Scheme.this,"Scheme  Upload Failed ",Toast.LENGTH_LONG).show();
                 progressDialog.dismiss();
             }
         });

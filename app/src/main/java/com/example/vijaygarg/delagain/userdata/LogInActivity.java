@@ -37,6 +37,7 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
                 FirebaseUser user=firebaseAuth.getCurrentUser();
                 if(user!=null){
                     startActivity(new Intent(LogInActivity.this,Welcome.class));
+                    finish();
                 }else{
 
                 }
@@ -52,27 +53,30 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
             public void onClick(View view) {
                 Intent i=new Intent(LogInActivity.this,SignUpActivity.class);
                 startActivity(i);
+                finish();
             }
         });
     }
 
     @Override
     public void onClick(View view) {
-        String uname=username.getText().toString().trim()+"@dell.com";
-        String pass=password.getText().toString().trim();
-        mAuth.signInWithEmailAndPassword(uname,pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-            @Override
-            public void onComplete(@NonNull Task<AuthResult> task) {
-                if(task.isSuccessful()){
-                    startActivity(new Intent(LogInActivity.this,Welcome.class));
-                    finish();
-                }else{
-                    Toast.makeText(getApplicationContext(),"Log In Failed",Toast.LENGTH_LONG).show();
+        if (view.getId() == R.id.tvcreateaccount) {
+            String uname = username.getText().toString().toLowerCase().trim() + "@dell.com";
+            String pass = password.getText().toString().trim();
+            mAuth.signInWithEmailAndPassword(uname, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        startActivity(new Intent(LogInActivity.this, Welcome.class));
+                        finish();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Log In Failed", Toast.LENGTH_LONG).show();
+                    }
                 }
-            }
-        });
+            });
 
 
+        }
     }
 
     @Override
