@@ -17,7 +17,7 @@
         android:layout_marginTop="15dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="serial tag"
+        android:hint="File Name (only xls files)"
         android:gravity="center"
         android:id="@+id/filename"
         />

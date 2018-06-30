@@ -1,5 +1,6 @@
 package com.example.vijaygarg.delagain.userdata;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -25,12 +26,14 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
     Button login;
     FirebaseAuth mAuth;
     FirebaseAuth.AuthStateListener mAtuthStateListener;
+    ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_log_in);
         mAuth=FirebaseAuth.getInstance();
+        progressDialog=new ProgressDialog(this);
         mAtuthStateListener=new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -60,13 +63,24 @@ public class LogInActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        if (view.getId() == R.id.tvcreateaccount) {
+        if (view.getId() == R.id.btnlogin) {
             String uname = username.getText().toString().toLowerCase().trim() + "@dell.com";
             String pass = password.getText().toString().trim();
+            if(uname.length()<=9){
+                username.setError("Enter User Id");
+                return;
+            }else if(pass.length()<=0){
+                password.setError("Enter Password");
+                return;
+            }
+            progressDialog.show();
+            progressDialog.setMessage("Logging In...");
             mAuth.signInWithEmailAndPassword(uname, pass).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
+                    progressDialog.dismiss();
                     if (task.isSuccessful()) {
+
                         startActivity(new Intent(LogInActivity.this, Welcome.class));
                         finish();
                     } else {
